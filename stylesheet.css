@@ -109,6 +109,17 @@ h2 {
   font-size: 32px;
 }
 
+.news-scroll {
+  max-height: 480px;
+  overflow-y: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.news-table tr {
+  height: 24px;
+}
+
 .one {
   width: 160px;
   height: 160px;
