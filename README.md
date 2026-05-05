@@ -1,6 +1,6 @@
-# snehaljauhri.github.io
+# sjauhri.github.io
 
-Source for [snehal.jauhri](https://snehaljauhri.github.io). Forked from [Jon Barron's template](https://github.com/jonbarron/jonbarron_website).
+Source for [snehal.jauhri](https://sjauhri.github.io). Forked from [Jon Barron's template](https://github.com/jonbarron/jonbarron_website).
 
 Plain HTML and CSS — no build step, no Jekyll, no Node. Edit a file, push to `main`, GitHub Pages serves it.
 
@@ -75,7 +75,7 @@ To highlight a row in pale yellow (like the IROS 2022 paper), add `bgcolor="#fff
 
 - Headshot: replace `12
 
-GitHub Pages is configured to serve `main` of the `sjauhri/snehaljauhri.github.io` repo. To publish edits:
+GitHub Pages is configured to serve `main` of the `sjauhri/sjauhri.github.io` repo. To publish edits:
 
 ```bash
 git add -A
@@ -83,7 +83,7 @@ git commit -m "..."
 git push
 ```
 
-The site rebuilds within ~1 minute at <https://snehaljauhri.github.io>.
+The site rebuilds within ~1 minute at <https://sjauhri.github.io>.
 
 ## Notes
 
