@@ -1,3 +1,15 @@
-{{ if or .Params.math .Site.Params.math }}
-  {{ partial "math.html" . }}
-{{ end }}
+{{- /* Add the math styles only on pages that actually contain math.
+       Detection is automatic — server-side rendering puts a <math> element in
+       the content — so there is no frontmatter flag to forget. The math param
+       still works as an explicit override. */ -}}
+{{- $hasMath := or .Params.math site.Params.math -}}
+{{- if not $hasMath -}}
+  {{- with .Content -}}
+    {{- if strings.Contains . "<math" -}}
+      {{- $hasMath = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $hasMath -}}
+  {{- partial "math.html" . -}}
+{{- end -}}

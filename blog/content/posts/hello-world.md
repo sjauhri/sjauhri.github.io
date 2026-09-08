@@ -3,7 +3,6 @@ title: "Hello World"
 date: 2026-09-08
 draft: false
 tags: ["meta"]
-math: false
 description: "First post — what this blog is about."
 ---
 

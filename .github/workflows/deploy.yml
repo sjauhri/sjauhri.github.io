@@ -41,14 +41,29 @@ jobs:
       - name: Build portfolio (static files)
         run: |
           mkdir -p _site
-          # Copy portfolio files (everything except blog/ and .github/)
-          rsync -av --exclude='blog/' --exclude='.github/' --exclude='_site/' --exclude='.git/' . _site/
+          # Copy the portfolio at the repo root into _site. The unquoted glob
+          # skips dotfiles, so .git/ .github/ .gitmodules are excluded already.
+          for item in *; do
+            case "$item" in
+              blog|_site) continue ;;
+            esac
+            cp -r "$item" _site/
+          done
 
       - name: Build Hugo blog
         run: |
-          cd blog
-          hugo --minify --baseURL "https://sjauhri.github.io/blog/"
-          cp -r public ../_site/blog
+          hugo --source blog --minify \
+               --baseURL "https://sjauhri.github.io/blog/" \
+               --destination "$GITHUB_WORKSPACE/_site/blog"
+
+      - name: Verify build output
+        run: |
+          test -f _site/index.html   || { echo "::error::portfolio index.html missing"; exit 1; }
+          test -f _site/stylesheet.css || { echo "::error::stylesheet.css missing"; exit 1; }
+          test -d _site/images       || { echo "::error::images/ missing"; exit 1; }
+          test -f _site/blog/index.html || { echo "::error::blog index.html missing"; exit 1; }
+          test ! -e _site/.git       || { echo "::error::.git leaked into _site"; exit 1; }
+          echo "Build output verified."
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

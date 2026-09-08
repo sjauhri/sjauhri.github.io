@@ -39,7 +39,13 @@ params:
 
   assets:
     disableHLJS: false
-    favicon: "/blog/favicon.ico"
+    # Paths are resolved with absURL against baseURL, so keep them relative.
+    # Files live in blog/static/ and are generated at blog/static/*.
+    favicon: "favicon.ico"
+    favicon16x16: "favicon-16x16.png"
+    favicon32x32: "favicon-32x32.png"
+    apple_touch_icon: "apple-touch-icon.png"
+    safari_pinned_tab: "safari-pinned-tab.svg"
 
   homeInfoParams:
     Title: "Hi, I'm Snehal"
@@ -52,15 +58,15 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/sjauhri"
-    - name: google scholar
-      url: "https://scholar.google.com/citations?user=YOUR_ID"
+    - name: googlescholar
+      url: "https://scholar.google.com/citations?user=Hx_XWGEAAAAJ&hl=en"
     - name: email
       url: "mailto:snehal.jauhri@tum.de"
 
   label:
     text: "The Interactive AI Blog"
-    icon: /blog/favicon.ico
-    iconHeight: 35
+    icon: favicon-32x32.png
+    iconHeight: 24
 
   cover:
     hidden: false
@@ -84,21 +90,24 @@ params:
 
 menu:
   main:
+    # Paths here resolve relative to baseURL (which already ends in /blog/),
+    # so they must NOT be prefixed with /blog. Portfolio needs an absolute
+    # URL to escape the /blog/ subpath and reach the site root.
     - identifier: portfolio
       name: Portfolio
-      url: /
+      url: https://sjauhri.github.io/
       weight: 1
-    - identifier: blog
-      name: Blog
-      url: /blog/
+    - identifier: posts
+      name: Posts
+      url: /posts/
       weight: 10
     - identifier: tags
       name: Tags
-      url: /blog/tags/
+      url: /tags/
       weight: 20
     - identifier: search
       name: Search
-      url: /blog/search/
+      url: /search/
       weight: 30
 
 outputs:
@@ -111,6 +120,18 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+    extensions:
+      # Protects math from Markdown processing. Without this, Goldmark eats the
+      # underscores in $\mathbb{E}_\tau$ as emphasis before math is rendered.
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['$$', '$$']
+            - ['\[', '\]']
+          inline:
+            - ['$', '$']
+            - ['\(', '\)']
   highlight:
     noClasses: false
     anchorLineNos: true
