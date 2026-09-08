@@ -17,7 +17,8 @@ minify:
 params:
   env: production
   title: "The Interactive AI Blog"
-  description: "Thoughts on robotics, 3D vision, reinforcement learning, and embodied AI."
+  # Shown in search results and social cards, so plain text and under ~155 chars.
+  description: "Thoughts on AI that acts, not just answers: 3D vision, physical AI, and reinforcement learning."
   author: Snehal Jauhri
   defaultTheme: auto
   disableThemeToggle: false
@@ -49,9 +50,14 @@ params:
 
   homeInfoParams:
     Title: "Hi, I'm Snehal"
-    Content: >
+    # Literal block (|) not folded (>): Markdown needs real blank lines to make
+    # separate paragraphs, and > collapses them into single newlines.
+    Content: |
       Postdoctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
-      I write about robotics, 3D scene understanding, reinforcement learning, and embodied AI.
+      Previously PhD at the [PEARL Lab](https://pearl-lab.com/), TU Darmstadt, and
+      research intern at [Ai2](https://allenai.org/).
+
+      **Thoughts on AI that acts, not just answers** — 3D vision, physical AI, and reinforcement learning.
 
       → [Back to my portfolio](/)
 

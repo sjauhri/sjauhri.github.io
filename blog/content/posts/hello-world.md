@@ -10,9 +10,9 @@ Welcome to my blog. I'm Snehal, a postdoctoral researcher at the [3D AI Lab](htt
 
 I'll use this space to write about research ideas, paper breakdowns, and things I find interesting in:
 
-- 3D scene understanding and generation
-- Reinforcement learning for robotics
-- Embodied AI
+- **3D vision** — scene understanding, neural fields, generating 3D worlds
+- **Physical AI** — embodied agents, manipulation, simulation and sim-to-real
+- **Reinforcement learning** — how agents learn to act from interaction
 
 ## What to expect
 
