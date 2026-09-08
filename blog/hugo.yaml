@@ -1,6 +1,6 @@
 baseURL: "https://sjauhri.github.io/blog/"
 languageCode: "en-us"
-title: "Snehal Jauhri"
+title: "Snehal Jauhri's Blog"
 theme: PaperMod
 pagination:
   pagerSize: 10
@@ -16,7 +16,7 @@ minify:
 
 params:
   env: production
-  title: Snehal Jauhri
+  title: "Snehal Jauhri's Blog"
   description: "Thoughts on robotics, 3D vision, reinforcement learning, and embodied AI."
   author: Snehal Jauhri
   defaultTheme: auto
@@ -58,7 +58,7 @@ params:
       url: "mailto:snehal.jauhri@tum.de"
 
   label:
-    text: "Snehal Jauhri"
+    text: "Snehal Jauhri's Blog"
     icon: /blog/favicon.ico
     iconHeight: 35
 
