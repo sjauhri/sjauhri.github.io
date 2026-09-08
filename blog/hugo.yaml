@@ -1,0 +1,120 @@
+baseURL: "https://sjauhri.github.io/blog/"
+languageCode: "en-us"
+title: "Snehal Jauhri"
+theme: PaperMod
+pagination:
+  pagerSize: 10
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  title: Snehal Jauhri
+  description: "Thoughts on robotics, 3D vision, reinforcement learning, and embodied AI."
+  author: Snehal Jauhri
+  defaultTheme: auto
+  disableThemeToggle: false
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  assets:
+    disableHLJS: false
+    favicon: "/blog/favicon.ico"
+
+  homeInfoParams:
+    Title: "Hi, I'm Snehal"
+    Content: >
+      Postdoctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
+      I write about robotics, 3D scene understanding, reinforcement learning, and embodied AI.
+
+      → [Back to my portfolio](/)
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/sjauhri"
+    - name: google scholar
+      url: "https://scholar.google.com/citations?user=YOUR_ID"
+    - name: email
+      url: "mailto:snehal.jauhri@tum.de"
+
+  label:
+    text: "Snehal Jauhri"
+    icon: /blog/favicon.ico
+    iconHeight: 35
+
+  cover:
+    hidden: false
+    hiddenInList: false
+    hiddenInSingle: false
+
+  editPost:
+    URL: "https://github.com/sjauhri/sjauhri.github.io/tree/main/blog/content"
+    Text: "Suggest Changes"
+    appendFilePath: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    limit: 10
+    keys: ["title", "permalink", "summary", "content"]
+
+menu:
+  main:
+    - identifier: portfolio
+      name: Portfolio
+      url: /
+      weight: 1
+    - identifier: blog
+      name: Blog
+      url: /blog/
+      weight: 10
+    - identifier: tags
+      name: Tags
+      url: /blog/tags/
+      weight: 20
+    - identifier: search
+      name: Search
+      url: /blog/search/
+      weight: 30
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+    anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    style: monokai
