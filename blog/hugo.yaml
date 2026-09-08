@@ -18,7 +18,7 @@ params:
   env: production
   title: "The Interactive AI Blog"
   # Shown in search results and social cards, so plain text and under ~155 chars.
-  description: "Thoughts on AI that acts, not just answers: 3D vision, physical AI, and reinforcement learning."
+  description: "Thoughts on AI that acts, not just answers: embodied and physical AI, interactive 3D worlds, and how agents learn to act in them."
   author: Snehal Jauhri
   defaultTheme: auto
   disableThemeToggle: false
@@ -57,7 +57,8 @@ params:
       Previously PhD at the [PEARL Lab](https://pearl-lab.com/), TU Darmstadt, and
       research intern at [Ai2](https://allenai.org/).
 
-      **Thoughts on AI that acts, not just answers** — 3D vision, physical AI, and reinforcement learning.
+      **Thoughts on AI that acts, not just answers** — embodied and physical AI,
+      interactive 3D worlds, and how agents learn to act in them.
 
       → [Back to my portfolio](/)
 
