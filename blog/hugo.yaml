@@ -70,10 +70,13 @@ params:
     - name: email
       url: "mailto:snehal.jauhri@tum.de"
 
+  # Header brand. label.text is the name (also the link's accessible name);
+  # brandSubtitle is the second line, rendered by partials/brand.html.
   label:
-    text: "The Interactive AI Blog"
+    text: "Snehal Jauhri"
     icon: favicon-32x32.png
-    iconHeight: 24
+    iconHeight: 30
+  brandSubtitle: "Interactive AI blog"
 
   cover:
     hidden: false

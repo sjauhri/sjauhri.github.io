@@ -1,3 +1,6 @@
+{{- /* Two-line header brand (name + blog line) on every page. */ -}}
+{{- partial "brand.html" . -}}
+
 {{- /* Add the math styles only on pages that actually contain math.
        Detection is automatic — server-side rendering puts a <math> element in
        the content — so there is no frontmatter flag to forget. The math param
