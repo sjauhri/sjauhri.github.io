@@ -1,0 +1,20 @@
+{{- /* Inline an SVG diagram from assets/diagrams/ inside a <figure>.
+
+       Inlining rather than <img src> is deliberate: an <img>-loaded SVG can
+       only see the OS `prefers-color-scheme`, not PaperMod's theme toggle
+       (which sets html[data-theme]). Inlined, the diagram picks up the page's
+       theme tokens and stays legible when a reader toggles the theme by hand.
+
+       Usage: {{< figure-svg src="randomize-button.svg" caption="..." >}} */ -}}
+
+{{- $src := printf "diagrams/%s" (.Get "src") -}}
+{{- with resources.Get $src -}}
+<figure class="figure-diagram">
+  {{ .Content | safeHTML }}
+  {{- with $.Get "caption" }}
+  <figcaption><p>{{ . | markdownify }}</p></figcaption>
+  {{- end }}
+</figure>
+{{- else -}}
+  {{- errorf "figure-svg: no such asset %q (looked in assets/%s)" $src $src -}}
+{{- end -}}
