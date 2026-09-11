@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Publish even if deploys are paused or the commit says to skip"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -19,7 +24,68 @@ defaults:
     shell: bash
 
 jobs:
+  # Decides whether this push should publish. Lets commits land on main without
+  # updating the live site. Three independent controls, see README.
+  gate:
+    name: Publish or hold
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.decide.outputs.publish }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Decide whether to publish
+        id: decide
+        env:
+          # Empty on push events; "true"/"false" on a manual run.
+          FORCED: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+
+          publish=true
+          reason="push to ${GITHUB_REF_NAME}"
+
+          # Read the message via git rather than a ${{ }} expression: a commit
+          # message is untrusted text and must never be interpolated into a
+          # shell script.
+          msg="$(git log -1 --pretty=%B)"
+
+          if [ -f .deploy-paused ]; then
+            publish=false
+            reason="deploys are paused — .deploy-paused is present in the repo"
+          fi
+
+          shopt -s nocasematch
+          if [[ "$msg" == *"[skip deploy]"* || "$msg" == *"[deploy skip]"* ]]; then
+            publish=false
+            reason="the commit message asked to skip the deploy"
+          fi
+          shopt -u nocasematch
+
+          if [ "${FORCED:-false}" = "true" ]; then
+            publish=true
+            reason="manual run with force enabled"
+          fi
+
+          echo "publish=$publish" >> "$GITHUB_OUTPUT"
+
+          if [ "$publish" = "true" ]; then
+            echo "### Publishing" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "### Held — the live site was not updated" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Reason: $reason" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$publish" = "false" ]; then
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "To publish: run this workflow manually with **force** ticked," \
+                 "or push again without the hold in place." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
   build:
+    needs: gate
+    if: needs.gate.outputs.publish == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
