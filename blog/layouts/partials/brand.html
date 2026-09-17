@@ -7,6 +7,13 @@
        bare text node, so a grid places the icon in a spanned first column and
        lets the name and the blog line stack beside it. */ -}}
 <style>
+  /* Width of the logo icon plus its gap, so anything below the brand can line
+     up with the name rather than the icon. Derived from the config so the two
+     cannot drift apart. */
+  :root {
+    --brand-indent: calc({{ site.Params.label.iconHeight | default 30 }}px + 0.45rem);
+  }
+
   .logo a {
     display: grid;
     grid-template-columns: auto 1fr;

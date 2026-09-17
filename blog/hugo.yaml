@@ -62,6 +62,9 @@ params:
 
       → [Back to my portfolio](/)
 
+  # Shown as text in the contact bar under the header.
+  contactEmail: "snehal.jauhri@tum.de"
+
   socialIcons:
     - name: github
       url: "https://github.com/sjauhri"

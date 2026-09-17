@@ -6,6 +6,9 @@
   {{- if strings.Contains . "<figure" -}}
     {{- partial "figures.html" $ -}}
   {{- end -}}
+  {{- if strings.Contains . "tabfig-panel" -}}
+    {{- partial "tabfig.html" $ -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* Add the math styles only on pages that actually contain math.

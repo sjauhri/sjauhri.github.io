@@ -1,0 +1,102 @@
+{{- /* Styling for the tabbed figure built by shortcodes/tabs.html.
+
+       Tab switching is pure CSS: the k-th checked radio reveals the k-th
+       panel. The radios are visually hidden but still focusable, so the group
+       stays keyboard-navigable and the focus ring is drawn on the matching
+       label. The correlating selectors are generated below for $max tabs;
+       raise $max here and in tabs.html together. */ -}}
+{{- $max := 8 -}}
+<style>
+  .post-content .tabfig { margin: 1.9em 0; }
+
+  .tabfig-panel {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  /* Hidden but focusable: never display:none, which removes it from the tab
+     order and breaks keyboard switching. */
+  .tabfig-panel > .tabfig-radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .tabfig-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabfig-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    padding: 0.7em 0.9em;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    text-align: center;
+    transition: color 0.12s ease, background 0.12s ease;
+  }
+
+  .tabfig-tab:hover { color: var(--primary); }
+  .tabfig-icon { line-height: 1; }
+
+  .tabfig-body { display: none; padding: 1em 1.1em 1.1em; }
+
+  .tabfig-heading {
+    margin: 0 0 0.35em;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .tabfig-desc { margin: 0 0 0.9em; color: var(--secondary); font-size: 0.94rem; }
+  .tabfig-desc :last-child { margin-bottom: 0; }
+
+  .tabfig-body img,
+  .tabfig-body video {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  /* The k-th selected tab shows the k-th panel and marks the k-th label. */
+{{- range $n := seq $max }}
+  .tabfig-panel > .tabfig-radio:nth-of-type({{ $n }}):checked ~ div.tabfig-body:nth-of-type({{ $n }}) { display: block; }
+  .tabfig-panel > .tabfig-radio:nth-of-type({{ $n }}):checked ~ .tabfig-strip > .tabfig-tab:nth-of-type({{ $n }}) {
+    color: var(--primary);
+    background: var(--theme);
+    border-bottom-color: var(--tabfig-accent);
+  }
+  .tabfig-panel > .tabfig-radio:nth-of-type({{ $n }}):focus-visible ~ .tabfig-strip > .tabfig-tab:nth-of-type({{ $n }}) {
+    outline: 2px solid var(--tabfig-accent);
+    outline-offset: -2px;
+  }
+{{- end }}
+
+  /* Accent matches the diagrams and favicon rather than introducing a colour. */
+  .tabfig-panel { --tabfig-accent: #0284c7; }
+  html[data-theme="dark"] .tabfig-panel { --tabfig-accent: #38bdf8; }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) .tabfig-panel { --tabfig-accent: #38bdf8; }
+  }
+
+  @media (max-width: 500px) {
+    .tabfig-strip { grid-template-columns: repeat(2, 1fr); }
+    .tabfig-tab { font-size: 0.82rem; padding: 0.6em 0.5em; }
+  }
+</style>

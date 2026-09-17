@@ -1,0 +1,91 @@
+{{- /* Email + social links, shown on every page directly under the header.
+
+       Rendered here rather than inside the theme's header.html: that file is
+       114 lines of nav, menus and toggles, and PaperMod exposes no header
+       hook, so layouts/baseof.html calls this straight after the header
+       instead. Icons come from the theme's own svg.html, so any name listed in
+       params.socialIcons works — see the icon list in
+       themes/PaperMod/layouts/_partials/svg.html.
+
+       Set params.contactEmail to show the address as text. Icons are taken
+       from params.socialIcons, skipping the email entry when the address is
+       already spelled out beside them. */ -}}
+
+{{- $email := site.Params.contactEmail -}}
+{{- $icons := where site.Params.socialIcons "name" "ne" "email" -}}
+{{- if or $email $icons -}}
+<div class="contact-bar">
+  <div class="contact-bar-inner">
+    {{- with $email }}
+    <a class="contact-bar-email" href="mailto:{{ . }}">{{ . }}</a>
+    {{- end }}
+    {{- if and $email $icons }}<span class="contact-bar-sep" aria-hidden="true">·</span>{{ end }}
+    {{- range $icons }}
+    <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+       title="{{ (.title | default .name) | title }}"
+       aria-label="{{ (.title | default .name) | title }}">
+      {{ partial "svg.html" . }}
+    </a>
+    {{- end }}
+  </div>
+</div>
+{{- end -}}
+
+<style>
+  .contact-bar {
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline: auto;
+    padding: 0 var(--gap);
+  }
+
+  .contact-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    /* Sits just below the header, indented past the logo icon so it lines up
+       with the site name rather than the page edge. */
+    padding: 0 0 0.55rem var(--brand-indent, 0px);
+    margin-top: -0.35rem;
+    font-size: 0.86rem;
+  }
+
+  .contact-bar-email {
+    color: var(--secondary);
+  }
+
+  .contact-bar-email:hover {
+    color: var(--primary);
+  }
+
+  .contact-bar-sep {
+    color: var(--secondary);
+    opacity: 0.55;
+  }
+
+  .contact-bar-inner a:not(.contact-bar-email) {
+    display: inline-flex;
+    align-items: center;
+    color: var(--secondary);
+  }
+
+  .contact-bar-inner a:not(.contact-bar-email):hover {
+    color: var(--primary);
+  }
+
+  .contact-bar-inner svg {
+    height: 17px;
+    width: 17px;
+    flex: none;
+  }
+
+  /* The bar carries these on every page now, so PaperMod's copy in the home
+     hero would be a second set of the same links on the same page. Hidden
+     rather than removed from params.socialIcons, which still feeds the
+     JSON-LD sameAs links in head. */
+  .home-info .social-icons { display: none; }
+
+  @media (max-width: 500px) {
+    .contact-bar-inner { font-size: 0.8rem; }
+  }
+</style>

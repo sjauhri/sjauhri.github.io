@@ -1,0 +1,69 @@
+{{- /* A tabbed figure: one strip of tabs, one media panel per tab.
+
+       Usage:
+
+         {{< tabs caption="Optional caption, markdown allowed." >}}
+           {{< tab title="Pick and place" heading="Optional bold line"
+                   src="/blog/clips/pick.mp4" poster="/blog/clips/pick.jpg" >}}
+           Optional description, markdown allowed.
+           {{< /tab >}}
+         {{< /tabs >}}
+
+       Tabs are plain radio inputs and labels, so switching works with no
+       JavaScript and the group is keyboard-navigable with arrow keys. The
+       inputs must precede the strip and the panels as siblings for the CSS
+       sibling selectors in partials/tabfig.html to reach them — so children
+       only register themselves in the Store and this file does the rendering.
+    */ -}}
+
+{{- $_ := .Inner -}}
+{{- $tabs := .Store.Get "tabs" | default slice -}}
+
+{{- if not $tabs -}}
+  {{- errorf "tabs: no {{< tab >}} children found in %s" .Position -}}
+{{- else -}}
+{{- $max := 8 -}}
+{{- if gt (len $tabs) $max -}}
+  {{- errorf "tabs: %d tabs in %s, but the stylesheet only covers %d" (len $tabs) .Position $max -}}
+{{- end -}}
+
+{{- /* Unique per page, so two tabbed figures never share a radio group. */ -}}
+{{- $g := printf "tabfig-%d" .Ordinal -}}
+
+<figure class="tabfig">
+  <div class="tabfig-panel">
+    {{- range $i, $t := $tabs }}
+    <input type="radio" name="{{ $g }}" id="{{ $g }}-{{ $i }}"
+           class="tabfig-radio"{{ if eq $i 0 }} checked{{ end }}>
+    {{- end }}
+
+    <nav class="tabfig-strip">
+      {{- range $i, $t := $tabs }}
+      <label class="tabfig-tab" for="{{ $g }}-{{ $i }}">
+        {{- with $t.icon }}<span class="tabfig-icon" aria-hidden="true">{{ . }}</span>{{ end }}
+        <span>{{ $t.title }}</span>
+      </label>
+      {{- end }}
+    </nav>
+
+    {{- range $i, $t := $tabs }}
+    <div class="tabfig-body">
+      {{- with $t.heading }}<p class="tabfig-heading">{{ . | markdownify }}</p>{{ end }}
+      {{- with $t.desc }}<div class="tabfig-desc">{{ . }}</div>{{ end }}
+      {{- with $t.src }}
+        {{- if in (slice ".mp4" ".webm" ".mov") (path.Ext .) }}
+      <video src="{{ . }}" controls muted loop playsinline preload="metadata"
+             {{ with $t.poster }}poster="{{ . }}"{{ end }}></video>
+        {{- else }}
+      <img src="{{ . }}" loading="lazy" alt="{{ $t.alt | default $t.title }}">
+        {{- end }}
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+
+  {{- with .Get "caption" }}
+  <figcaption><p>{{ . | markdownify }}</p></figcaption>
+  {{- end }}
+</figure>
+{{- end -}}

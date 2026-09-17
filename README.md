@@ -133,6 +133,38 @@ while working, and remove it (or set `false`) to publish.
   defined in `blog/layouts/partials/figures.html`.
 - **Captions** are written `<figcaption><p>…</p></figcaption>` — PaperMod styles
   a bare `figcaption` as a bold title and the inner `<p>` as the caption.
+- **Tabbed figures** show several clips or images in one figure, one per tab:
+
+  ```
+  {{< tabs caption="Optional caption, markdown allowed." >}}
+    {{< tab title="Pick and place" heading="Optional bold line"
+            src="/blog/clips/pick.mp4" poster="/blog/clips/pick.jpg" >}}
+    Optional description, markdown allowed.
+    {{< /tab >}}
+    {{< tab title="Door opening" src="/images/molmospaces.gif" >}}
+    {{< /tab >}}
+  {{< /tabs >}}
+  ```
+
+  `title` is the tab label and is required; `heading`, `src`, `poster`, `alt`
+  and `icon` are optional, and a `.mp4`/`.webm`/`.mov` `src` renders as a video
+  rather than an image. Switching is plain radio inputs and CSS, so it works
+  with JavaScript disabled and the tabs are keyboard-navigable with arrow keys.
+  The stylesheet covers up to 8 tabs — to go beyond, raise `$max` in both
+  `blog/layouts/partials/tabfig.html` and `blog/layouts/shortcodes/tabs.html`.
+
+## Header contact line
+
+The email and social links under the site name come from
+`blog/layouts/partials/contact-bar.html`: `params.contactEmail` is the address
+shown as text, and the icons are `params.socialIcons` minus the email entry.
+Icon names must match a case in the theme's
+`themes/PaperMod/layouts/_partials/svg.html`.
+
+PaperMod has no hook for adding markup to its header, and a contact line needs
+real links rather than CSS, so `blog/layouts/baseof.html` overrides the theme's
+copy solely to call this partial after the header. That is the only difference —
+when updating PaperMod, diff the two files and carry over anything new.
 
 ## Publishing
 
