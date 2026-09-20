@@ -12,10 +12,14 @@
     text-align: center;
   }
 
+  /* Images keep their intrinsic size up to the column width — never upscaled,
+     which would just blur a small asset. margin-inline centres them, since
+     the theme makes them block boxes and text-align cannot reach those. */
   .post-content figure img,
   .post-content figure video {
     max-width: 100%;
     height: auto;
+    margin-inline: auto;
     border-radius: 6px;
   }
 
