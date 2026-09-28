@@ -1,6 +1,6 @@
 baseURL: "https://sjauhri.github.io/blog/"
 languageCode: "en-us"
-title: "The Interactive AI Blog"
+title: "Snehal Jauhri — Research Diary"
 theme: PaperMod
 pagination:
   pagerSize: 10
@@ -16,7 +16,7 @@ minify:
 
 params:
   env: production
-  title: "The Interactive AI Blog"
+  title: "Snehal Jauhri — Research Diary"
   # Shown in search results and social cards, so plain text and under ~155 chars.
   description: "Thoughts on AI that acts, not just answers: embodied and physical AI, interactive 3D worlds, and how agents learn to act in them."
   author: Snehal Jauhri
@@ -79,7 +79,7 @@ params:
     text: "Snehal Jauhri"
     icon: favicon-32x32.png
     iconHeight: 30
-  brandSubtitle: "Interactive AI blog"
+  brandSubtitle: "Research diary"
 
   cover:
     hidden: false
