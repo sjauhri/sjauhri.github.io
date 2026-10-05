@@ -62,16 +62,16 @@ params:
       **I post my thoughts here on interactive AI**: embodied and physical AI,
       interactive 3D worlds, and how agents learn to act in them.
 
-  # Shown as text in the contact bar under the header.
-  contactEmail: "snehal.jauhri@tum.de"
-
   socialIcons:
     - name: github
       url: "https://github.com/sjauhri"
     - name: googlescholar
       url: "https://scholar.google.com/citations?user=Hx_XWGEAAAAJ&hl=en"
-    - name: email
-      url: "mailto:snehal.jauhri@tum.de"
+    - name: linkedin
+      title: LinkedIn
+      url: "https://www.linkedin.com/in/snehaljauhri/"
+    - name: twitter
+      url: "https://twitter.com/SnehalJauhri"
 
   # Header brand. label.text is the name (also the link's accessible name);
   # brandSubtitle is the second line, rendered by partials/brand.html.
@@ -92,16 +92,6 @@ params:
     Text: "Suggest Changes"
     appendFilePath: true
 
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    limit: 10
-    keys: ["title", "permalink", "summary", "content"]
-
 menu:
   main:
     # Paths here resolve relative to baseURL (which already ends in /blog/),
@@ -110,21 +100,16 @@ menu:
     - identifier: website
       name: Website
       url: https://sjauhri.github.io/
-      weight: 1
+      weight: 10
     - identifier: posts
       name: Posts
       url: /
-      weight: 10
-    # - identifier: search
-    #   name: Search
-    #   url: /search/
-    #   weight: 30
+      weight: 1
 
 outputs:
   home:
     - HTML
     - RSS
-    - JSON
 
 markup:
   goldmark:

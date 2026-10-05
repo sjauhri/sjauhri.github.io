@@ -3,6 +3,7 @@ title: "MolmoBot: Has Sim2Real for Manipulation Finally Been Unlocked?"
 date: 2026-09-10
 draft: false
 description: "Locomotion got a randomize button in 2021 and sim2real fell over. Manipulation never got one — until now."
+summary: "Locomotion got its randomize button in 2021. Manipulation finally has one too."
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
