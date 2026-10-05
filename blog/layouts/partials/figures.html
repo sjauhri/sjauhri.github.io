@@ -23,6 +23,28 @@
     border-radius: 6px;
   }
 
+  /* Videos, GIFs and the post's cover at 80% of the column: the posts are
+     short, and full-width media dominated the page. Full width on phones,
+     where the column is already narrow. */
+  .post-content figure video,
+  .post-content figure img[src$=".gif"],
+  .post-single > .entry-cover img {
+    width: 80%;
+  }
+
+  .post-single > .entry-cover img {
+    display: block;
+    margin-inline: auto;
+  }
+
+  @media (max-width: 600px) {
+    .post-content figure video,
+    .post-content figure img[src$=".gif"],
+    .post-single > .entry-cover img {
+      width: 100%;
+    }
+  }
+
   /* Diagrams read better without the frame that suits photos and rollouts. */
   .post-content figure img[src$=".svg"] {
     border-radius: 0;

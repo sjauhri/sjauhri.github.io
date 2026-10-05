@@ -25,10 +25,18 @@ Marco Hutter's group at ETH Zurich, the group behind ANYmal, worked out large-sc
 
 Two things came out of it. The first was making RL fast: thousands of simulations running in parallel, all gathering experience at once. That part got the attention.
 
-The second is the one I keep coming back to. Once you have a policy that walks passably in simulation, you press a button called **randomize**. Now you are training across many simulations that differ slightly in terrain, robot dynamics, friction, mass and actuator response. This is physics domain randomization at scale. Instead of learning to walk in one simulator, the robot learns to walk across a whole range of plausible ones.
+<figure>
+  <video src="/images/quadruped-parallel.mp4" autoplay muted loop playsinline preload="metadata"
+         aria-label="Thousands of simulated ANYmal quadrupeds learning to walk in parallel across stairs and rough terrain."></video>
+  <figcaption>
+    <p>Thousands of ANYmal robots learning to walk in parallel on a single GPU, each on
+    different terrain. [Source: <a href="https://arxiv.org/abs/2109.11978">Rudin et al.,
+    Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning,
+    CoRL 2021</a>]</p>
+  </figcaption>
+</figure>
 
-{{< figure-svg src="domain-randomization.svg"
-    caption="Domain randomization, shown for two physics parameters. A policy trained in one simulator fits one setting, and the real robot sits somewhere else. Randomizing the parameters trains across a whole region of simulators, wide enough that the real robot falls inside it." >}}
+The second is the one I keep coming back to. Once you have a policy that walks passably in simulation, you press a button called **randomize**. Now you are training across many simulations that differ slightly in terrain, robot dynamics, friction, mass and actuator response. This is physics domain randomization at scale. Instead of learning to walk in one simulator, the robot learns to walk across a whole range of plausible ones.
 
 What comes out transfers *directly*. You take the policy trained with the button pressed and you put it on the robot the next day.
 
