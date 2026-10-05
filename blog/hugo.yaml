@@ -57,7 +57,7 @@ params:
     # Literal block (|) not folded (>): Markdown needs real blank lines to make
     # separate paragraphs, and > collapses them into single newlines.
     Content: |
-      Postdoctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
+      Post-Doctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
       
       **I post my thoughts here on Interactive AI**: embodied and physical AI,
       interactive 3D worlds, and how agents and robots can learn to act in them.
