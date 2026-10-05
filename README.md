@@ -32,8 +32,8 @@ python3 -m http.server 8765
 
 Open <http://127.0.0.1:8765/>. Edits to any file are reflected on refresh.
 
-**Blog** — needs [Hugo extended](https://gohugo.io/installation/) (0.146 or newer,
-which the PaperMod theme requires):
+**Blog** — needs [Hugo extended](https://gohugo.io/installation/) 0.165.0, the version
+the deploy workflow pins (PaperMod needs at least 0.146):
 
 ```bash
 hugo server --source blog --buildDrafts

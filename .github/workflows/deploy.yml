@@ -97,7 +97,8 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "latest"
+          # Keep in step with the local Hugo used for previews (`hugo version`).
+          hugo-version: "0.165.0"
           extended: true
 
       - name: Setup Pages
