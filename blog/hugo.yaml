@@ -10,6 +10,10 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
+# No tags or categories: too few posts for them to help. Drops the /tags/ and
+# /categories/ pages and the tag list under each post.
+taxonomies: {}
+
 minify:
   disableXML: true
   minifyOutput: true
@@ -101,20 +105,16 @@ params:
 menu:
   main:
     # Paths here resolve relative to baseURL (which already ends in /blog/),
-    # so they must NOT be prefixed with /blog. Home needs an absolute
+    # so they must NOT be prefixed with /blog. Website needs an absolute
     # URL to escape the /blog/ subpath and reach the site root.
-    - identifier: home
-      name: Home
+    - identifier: website
+      name: Website
       url: https://sjauhri.github.io/
       weight: 1
     - identifier: posts
       name: Posts
-      url: /posts/
+      url: /
       weight: 10
-    # - identifier: tags
-    #   name: Tags
-    #   url: /tags/
-    #   weight: 20
     # - identifier: search
     #   name: Search
     #   url: /search/
