@@ -87,11 +87,6 @@ params:
     hiddenInList: false
     hiddenInSingle: false
 
-  editPost:
-    URL: "https://github.com/sjauhri/sjauhri.github.io/tree/main/blog/content"
-    Text: "Suggest Changes"
-    appendFilePath: true
-
 menu:
   main:
     # Paths here resolve relative to baseURL (which already ends in /blog/),
