@@ -60,7 +60,7 @@ The substrate is [MolmoSpaces](https://github.com/allenai/molmospaces) (RSS 2026
        alt="Procedurally generated household environments from MolmoSpaces.">
   <figcaption>
     <p>MolmoSpaces: procedurally generated households. A randomize button needs
-    something to randomize <em>over</em>.</p>
+    something to randomize <em>over</em>. Source: <a href="https://github.com/allenai/molmospaces">MolmoSpaces</a>.</p>
   </figcaption>
 </figure>
 
