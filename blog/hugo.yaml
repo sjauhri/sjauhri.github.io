@@ -79,7 +79,7 @@ params:
     text: "Snehal Jauhri"
     # Square crop of the portfolio headshot (images/snehal.jpg), shown round.
     icon: logo.jpg
-    iconHeight: 30
+    iconHeight: 48
   brandSubtitle: "Research diary"
 
   cover:

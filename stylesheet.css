@@ -96,6 +96,20 @@ h2 {
   font-size: 22px;
 }
 
+/* Link to the blog under the header: heading-sized and underlined so it
+   reads as a destination, not another item in the contact row. */
+a.diary-link {
+  font-size: 22px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+a.diary-link:hover,
+a.diary-link:focus {
+  text-decoration: underline;
+}
+
 .papertitle {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;

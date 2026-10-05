@@ -1,0 +1,31 @@
+{{- /* Copied from themes/PaperMod/layouts/_partials/home_info.html, plus a
+       "Posts:" heading after the intro and tighter spacing. The theme gives
+       .first-entry a 320px min-height with centred content and a 2×gap bottom
+       margin, which left a large empty band between the intro and the posts.
+       When updating the theme, diff this against the theme's copy. */ -}}
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>{{ .Title | markdownify }}</h1>
+    </header>
+    <div class="entry-content md-content">
+        {{ $opts := dict "display" "block" }}
+        {{ .Content | $.Page.RenderString $opts }}
+    </div>
+    <footer class="entry-footer">
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+    </footer>
+</article>
+<h2 class="home-posts-heading">Posts:</h2>
+<style>
+  .first-entry.home-info {
+    min-height: 0;
+    margin-bottom: 0;
+  }
+
+  .home-posts-heading {
+    margin: 28px 0 var(--gap);
+    font-size: 24px;
+  }
+</style>
+{{- end -}}
