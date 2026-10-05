@@ -1,11 +1,11 @@
 ---
-title: "Has Sim2Real for Manipulation Finally Been Unlocked?"
+title: "MolmoBot: Has Sim2Real for Manipulation Finally Been Unlocked?"
 date: 2026-09-10
 draft: false
 tags: ["sim2real", "manipulation", "simulation", "physical AI", "robot learning"]
 description: "Locomotion got a randomize button in 2021 and sim2real fell over. Manipulation never got one — until now."
 cover:
-  image: "/images/molmobot.gif"
+  image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
   relative: false
 ---
@@ -69,8 +69,8 @@ None of those ingredients is exotic. That is rather the point. What you get by c
 The policies transfer directly. There are demos on the [project page](https://allenai.github.io/MolmoBot/) where the robot gets physically shoved up and down *mid-rollout* and the policy simply carries on, because a policy trained across ten thousand slightly wrong worlds has seen worse.
 
 <figure>
-  <img src="/images/molmobot.gif" loading="lazy"
-       alt="MolmoB0T policies executing manipulation tasks on a real robot.">
+  <img src="/images/molmobot-sim2real.gif" loading="lazy"
+       alt="MolmoB0T policies opening a door and a drawer in randomized simulation (top) and executing manipulation tasks on a real robot (bottom).">
   <figcaption>
     <p>Trained entirely in randomized simulation. Running on real hardware.</p>
   </figcaption>
