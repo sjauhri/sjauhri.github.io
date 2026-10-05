@@ -64,6 +64,15 @@ The substrate is [MolmoSpaces](https://github.com/allenai/molmospaces) (RSS 2026
 
 None of those ingredients is exotic. That is rather the point. What you get by combining them is the randomize button for manipulation: generate at scale across textures, lighting, object placement and dynamics, and you get the diversity that finally puts real-world observations in distribution.
 
+<figure>
+  <video src="/images/molmobot-data.mp4" autoplay muted loop playsinline preload="metadata"
+         aria-label="Simulated robots performing manipulation tasks across many procedurally generated households, zooming out to thousands of episodes."></video>
+  <figcaption>
+    <p>The button, pressed: the same tasks generated across thousands of randomized
+    households. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
+  </figcaption>
+</figure>
+
 ## What actually changes
 
 The policies transfer directly. There are demos on the [project page](https://allenai.github.io/MolmoBot/) where the robot gets physically shoved up and down *mid-rollout* and the policy simply carries on, because a policy trained across ten thousand slightly wrong worlds has seen worse.
@@ -73,6 +82,16 @@ The policies transfer directly. There are demos on the [project page](https://al
        alt="MolmoB0T policies opening a door and a drawer in randomized simulation (top) and executing manipulation tasks on a real robot (bottom).">
   <figcaption>
     <p>Trained entirely in randomized simulation. Running on real hardware.</p>
+  </figcaption>
+</figure>
+
+<figure>
+  <video src="/images/molmobot-camera-demo.mp4" autoplay muted loop playsinline preload="metadata"
+         aria-label="A real robot arm putting a banana in a brown bowl, shown from a third-person camera and the policy's own exo and wrist cameras."></video>
+  <figcaption>
+    <p>"Put the banana in the brown bowl." When the brown bowl is out of view the
+    policy heads for the black one, then changes course once it sees the right
+    bowl. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
   </figcaption>
 </figure>
 
