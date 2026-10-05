@@ -2,8 +2,8 @@
 title: "MolmoBot: Has Sim2Real for Manipulation Finally Been Unlocked?"
 date: 2026-09-10
 draft: false
-description: "Locomotion got a randomize button in 2021 and sim2real fell over. Manipulation never got one — until now."
-summary: "Locomotion got its randomize button in 2021. Manipulation finally has one too."
+description: "Walking robots got their \"randomize\" button in 2021. Robot Manipulation finally has one too."
+summary: "Walking robots got their \"randomize\" button in 2021. Robot Manipulation finally has one too."
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
@@ -14,7 +14,7 @@ When I started my PhD in 2021, the state of robot learning was roughly this: we 
 
 Transfer to real hardware was sparse. You could get it to work if you constrained the action space enough, or leaned on a bag of tricks, and even then success rates were low. Plenty of serious people doubted whether simulation policies would ever transfer at all. "It works in simulation" was the kind of sentence that made reviewers narrow their eyes.
 
-## Then locomotion got a button
+## Then robot locomotion got a button
 
 The breakthrough did not come from manipulation. It came from legged locomotion — quadrupeds specifically.
 
