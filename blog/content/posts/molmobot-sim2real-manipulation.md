@@ -2,8 +2,8 @@
 title: "MolmoBot: Has Sim2Real for Manipulation Finally Been Unlocked?"
 date: 2026-09-10
 draft: false
-description: "Walking robots got their \"randomize\" button in 2021. Robot Manipulation finally has one too."
-summary: "Walking robots got their \"randomize\" button in 2021. Robot Manipulation finally has one too."
+description: 'Years ago, robot quadrupeds got their "randomize" button which kickstarted sim2real. Now, robot manipulation finally has one too.'
+summary: 'Years ago, robot quadrupeds got their "randomize" button which kickstarted sim2real. Now, robot manipulation finally has one too.'
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
