@@ -1,0 +1,16 @@
+# Applies only to `hugo server` (the development environment); the deploy
+# workflow builds with the production environment and never reads this file.
+#
+# In production the portfolio sits at the site root and the blog at /blog/, so
+# posts link to portfolio files such as /images/molmobot.gif. `hugo server`
+# only sees blog/, so serve the blog from the root here and mount the
+# portfolio's images/ so those links resolve. Preview at http://localhost:1313/.
+baseURL: "/"
+
+module:
+  mounts:
+    # Declaring any static mount replaces the default one, so restate it.
+    - source: static
+      target: static
+    - source: ../images
+      target: static/images

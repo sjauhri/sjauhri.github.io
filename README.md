@@ -39,8 +39,10 @@ the deploy workflow pins (PaperMod needs at least 0.146):
 hugo server --source blog --buildDrafts
 ```
 
-Open <http://localhost:1313/blog/>. This live-reloads on save and shows posts
-marked `draft: true`.
+Open <http://localhost:1313/>. This live-reloads on save and shows posts
+marked `draft: true`. The preview serves the blog from the root rather than
+`/blog/`, and mounts the portfolio's `images/` so posts can use the same
+`/images/...` paths as the live site — see `blog/config/development/hugo.yaml`.
 
 To check the whole site exactly as the workflow builds it:
 
