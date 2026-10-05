@@ -1,5 +1,5 @@
 ---
-title: "MolmoBot: Has Sim2Real for Manipulation Finally Been Unlocked?"
+title: "Has Sim2Real for Robot Manipulation Finally Been Unlocked?"
 date: 2026-09-10
 draft: false
 description: 'Years ago, robot quadrupeds got their "randomize" button which kickstarted sim2real. Now, robot manipulation finally has one too.'
