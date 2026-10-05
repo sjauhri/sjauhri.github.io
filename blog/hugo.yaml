@@ -54,13 +54,9 @@ params:
     # separate paragraphs, and > collapses them into single newlines.
     Content: |
       Postdoctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
-      Previously PhD at the [PEARL Lab](https://pearl-lab.com/), TU Darmstadt, and
-      research intern at [Ai2](https://allenai.org/).
-
-      **Thoughts on AI that acts, not just answers** — embodied and physical AI,
+      
+      **I post my thoughts here on interactive AI**: embodied and physical AI,
       interactive 3D worlds, and how agents learn to act in them.
-
-      → [Back to my portfolio](/)
 
   # Shown as text in the contact bar under the header.
   contactEmail: "snehal.jauhri@tum.de"
@@ -104,24 +100,24 @@ params:
 menu:
   main:
     # Paths here resolve relative to baseURL (which already ends in /blog/),
-    # so they must NOT be prefixed with /blog. Portfolio needs an absolute
+    # so they must NOT be prefixed with /blog. Home needs an absolute
     # URL to escape the /blog/ subpath and reach the site root.
-    - identifier: portfolio
-      name: Portfolio
+    - identifier: home
+      name: Home
       url: https://sjauhri.github.io/
       weight: 1
     - identifier: posts
       name: Posts
       url: /posts/
       weight: 10
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 20
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 30
+    # - identifier: tags
+    #   name: Tags
+    #   url: /tags/
+    #   weight: 20
+    # - identifier: search
+    #   name: Search
+    #   url: /search/
+    #   weight: 30
 
 outputs:
   home:
