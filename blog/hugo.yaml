@@ -73,7 +73,8 @@ params:
   # brandSubtitle is the second line, rendered by partials/brand.html.
   label:
     text: "Snehal Jauhri"
-    icon: favicon-32x32.png
+    # Square crop of the portfolio headshot (images/snehal.jpg), shown round.
+    icon: logo.jpg
     iconHeight: 30
   brandSubtitle: "Research diary"
 
