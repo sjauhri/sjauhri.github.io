@@ -10,6 +10,8 @@ cover:
   relative: false
 ---
 
+*Paper: [MolmoB0T: Large-Scale Simulation Enables Zero-Shot Manipulation](https://arxiv.org/abs/2603.16861) · [Project page](https://allenai.github.io/MolmoBot/)*
+
 When I started my PhD in 2021, the state of robot learning was roughly this: we had beautiful simulations, we had policies that did impressive things inside them, and we had very little that worked on an actual robot.
 
 Transfer to real hardware was sparse. You could get it to work if you constrained the action space enough, or leaned on a bag of tricks, and even then success rates were low. Plenty of serious people doubted whether simulation policies would ever transfer at all. "It works in simulation" was the kind of sentence that made reviewers narrow their eyes.
@@ -69,7 +71,7 @@ None of those ingredients is exotic. That is rather the point. What you get by c
          aria-label="Simulated robots performing manipulation tasks across many procedurally generated households, zooming out to thousands of episodes."></video>
   <figcaption>
     <p>The button, pressed: the same tasks generated across thousands of randomized
-    households. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
+    households. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
   </figcaption>
 </figure>
 
@@ -85,15 +87,7 @@ The policies transfer directly. There are demos on the [project page](https://al
   <figcaption>
     <p>"Put the blue tape in the wooden box," while the desk moves up and down
     underneath. The training data started the robot at random heights, so this is
-    just one more variation. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
-  </figcaption>
-</figure>
-
-<figure>
-  <img src="/images/molmobot-sim2real.gif" loading="lazy"
-       alt="MolmoB0T policies opening a door and a drawer in randomized simulation (top) and executing manipulation tasks on a real robot (bottom).">
-  <figcaption>
-    <p>Trained entirely in randomized simulation. Running on real hardware.</p>
+    just one more variation. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
   </figcaption>
 </figure>
 
@@ -103,7 +97,7 @@ The policies transfer directly. There are demos on the [project page](https://al
   <figcaption>
     <p>"Put the banana in the brown bowl." When the brown bowl is out of view the
     policy heads for the black one, then changes course once it sees the right
-    bowl. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
+    bowl. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
   </figcaption>
 </figure>
 
@@ -124,10 +118,14 @@ No, and I would be suspicious of anyone who said otherwise.
 For rigid-body manipulation and mobile manipulation, partly yes: there is now a recipe that gets you to something like 80% success, which you then fine-tune with real data. That is a genuinely different starting point from zero.
 
 {{< figure-svg src="zero-shot-results.svg"
-    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 architecture and swaps in simulation data, so much of the gain comes from the data. Numbers from the [MolmoB0T paper](https://arxiv.org/abs/2603.16861)." >}}
+    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 architecture and swaps in simulation data, so much of the gain comes from the data. Source: [MolmoBot](https://arxiv.org/abs/2603.16861)." >}}
 
 For deformables, soft bodies, and the long tail of objects that do not behave like convex rigid lumps, it remains to be seen. Cloth does not care about your friction randomization.
 
 What I find most interesting is that the bottleneck has moved. It is no longer "can this transfer at all" — it is how many axes of diversity we can scale. MolmoSpaces is a good household simulator and there is a lot of headroom left in it.
 
 More on that soon.
+
+---
+
+MolmoBot was accepted as an Oral at the Conference on Robot Learning (CoRL) 2026! You can read the whole paper [here](https://arxiv.org/abs/2603.16861), and see more of the robot on the [project page](https://allenai.github.io/MolmoBot/).
