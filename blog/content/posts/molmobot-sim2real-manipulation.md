@@ -49,7 +49,7 @@ Meanwhile simulation for manipulation quietly went out of fashion. Not disproven
 
 During my year-long research scientist internship at the Allen Institute for AI, I wanted to work on exactly this. Ai2 had already seen visual sim2real work for household *navigation*, and the obvious question was whether the recipe extended to manipulation and mobile manipulation. Having spent a PhD on robot learning for homes, on 2D and 3D vision policies, and on mobile manipulation, I did not need much convincing.
 
-With [MolmoB0T](https://allenai.github.io/MolmoBot/), I think the answer is yes.
+With [MolmoB0T](https://allenai.github.io/MolmoBot/) ([paper](https://arxiv.org/abs/2603.16861), [Ai2's announcement](https://allenai.org/blog/molmobot-robot-manipulation)), I think the answer is yes.
 
 The substrate is [MolmoSpaces](https://github.com/allenai/molmospaces) (RSS 2026): 10K to 100K procedurally generated households, built from Objaverse assets with human-authored doors and articulated objects. On top of that, fairly standard data generators — the kind that work well when you have ground-truth object poses, collision bodies and bounding boxes to lean on — solving pick-and-place, door opening, and opening articulated objects.
 
@@ -73,9 +73,21 @@ None of those ingredients is exotic. That is rather the point. What you get by c
   </figcaption>
 </figure>
 
+For a sense of scale: MolmoBot-Data is 1.8 million trajectories across 94,000 generated houses and 11,000 objects, roughly 5,800 robot-hours of experience. DROID, one of the largest real-world manipulation datasets, is 76,000 trajectories from 350 hours of teleoperation.
+
 ## What actually changes
 
-The policies transfer directly. There are demos on the [project page](https://allenai.github.io/MolmoBot/) where the robot gets physically shoved up and down *mid-rollout* and the policy simply carries on, because a policy trained across ten thousand slightly wrong worlds has seen worse.
+The policies transfer directly. There are demos on the [project page](https://allenai.github.io/MolmoBot/) where the desk the robot is mounted on is raised and lowered *mid-rollout* and the policy simply carries on, because a policy trained across tens of thousands of slightly wrong worlds has seen worse.
+
+<figure>
+  <video src="/images/molmobot-table-height.mp4" autoplay muted loop playsinline preload="metadata"
+         aria-label="A robot arm putting blue tape in a wooden box while the desk it is mounted on is raised and lowered."></video>
+  <figcaption>
+    <p>"Put the blue tape in the wooden box," while the desk moves up and down
+    underneath. The training data started the robot at random heights, so this is
+    just one more variation. Video from the <a href="https://allenai.github.io/MolmoBot/">MolmoB0T project page</a>.</p>
+  </figcaption>
+</figure>
 
 <figure>
   <img src="/images/molmobot-sim2real.gif" loading="lazy"
@@ -110,6 +122,9 @@ Simulation is back. Shoutout to concurrent work from RAI, [AnyTask](https://arxi
 No, and I would be suspicious of anyone who said otherwise.
 
 For rigid-body manipulation and mobile manipulation, partly yes: there is now a recipe that gets you to something like 80% success, which you then fine-tune with real data. That is a genuinely different starting point from zero.
+
+{{< figure-svg src="zero-shot-results.svg"
+    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 architecture and swaps in simulation data, so much of the gain comes from the data. Numbers from the [MolmoB0T paper](https://arxiv.org/abs/2603.16861)." >}}
 
 For deformables, soft bodies, and the long tail of objects that do not behave like convex rigid lumps, it remains to be seen. Cloth does not care about your friction randomization.
 
