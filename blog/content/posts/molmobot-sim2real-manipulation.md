@@ -60,7 +60,7 @@ The substrate is [MolmoSpaces](https://github.com/allenai/molmospaces) (RSS 2026
        alt="Procedurally generated household environments from MolmoSpaces.">
   <figcaption>
     <p>MolmoSpaces: procedurally generated households. A randomize button needs
-    something to randomize <em>over</em>. Source: <a href="https://github.com/allenai/molmospaces">MolmoSpaces</a>.</p>
+    something to randomize <em>over</em>. [Source: <a href="https://github.com/allenai/molmospaces">MolmoSpaces</a>]</p>
   </figcaption>
 </figure>
 
@@ -71,7 +71,7 @@ None of those ingredients is exotic. That is rather the point. What you get by c
          aria-label="Simulated robots performing manipulation tasks across many procedurally generated households, zooming out to thousands of episodes."></video>
   <figcaption>
     <p>The button, pressed: the same tasks generated across thousands of randomized
-    households. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
+    households. [Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>]</p>
   </figcaption>
 </figure>
 
@@ -87,7 +87,7 @@ The policies transfer directly. There are demos on the [project page](https://al
   <figcaption>
     <p>"Put the blue tape in the wooden box," while the desk moves up and down
     underneath. The training data started the robot at random heights, so this is
-    just one more variation. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
+    just one more variation. [Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>]</p>
   </figcaption>
 </figure>
 
@@ -97,7 +97,7 @@ The policies transfer directly. There are demos on the [project page](https://al
   <figcaption>
     <p>"Put the banana in the brown bowl." When the brown bowl is out of view the
     policy heads for the black one, then changes course once it sees the right
-    bowl. Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>.</p>
+    bowl. [Source: <a href="https://allenai.github.io/MolmoBot/">MolmoBot</a>]</p>
   </figcaption>
 </figure>
 
@@ -118,7 +118,7 @@ No, and I would be suspicious of anyone who said otherwise.
 For rigid-body manipulation and mobile manipulation, partly yes: there is now a recipe that gets you to something like 80% success, which you then fine-tune with real data. That is a genuinely different starting point from zero.
 
 {{< figure-svg src="zero-shot-results.svg"
-    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 architecture and swaps in simulation data, so much of the gain comes from the data. Source: [MolmoBot](https://arxiv.org/abs/2603.16861)." >}}
+    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 architecture and swaps in simulation data, so much of the gain comes from the data. [Source: [MolmoBot](https://arxiv.org/abs/2603.16861)]" >}}
 
 For deformables, soft bodies, and the long tail of objects that do not behave like convex rigid lumps, it remains to be seen. Cloth does not care about your friction randomization.
 
@@ -128,4 +128,4 @@ More on that soon.
 
 ---
 
-MolmoBot was accepted as an Oral at the Conference on Robot Learning (CoRL) 2026! You can read the whole paper [here](https://arxiv.org/abs/2603.16861), and see more of the robot on the [project page](https://allenai.github.io/MolmoBot/).
+MolmoBot was accepted as an Oral at the Conference on Robot Learning (CoRL) 2026! You can read the paper [here](https://arxiv.org/abs/2603.16861), and see more on the [project page](https://allenai.github.io/MolmoBot).
