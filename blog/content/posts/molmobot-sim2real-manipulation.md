@@ -1,5 +1,5 @@
 ---
-title: "Has Sim2Real for Robot Manipulation Finally Been Unlocked?"
+title: "Sim2Real for Robot Manipulation is finally scaling"
 date: 2026-09-10
 draft: false
 ShowToc: false
