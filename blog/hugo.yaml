@@ -101,6 +101,17 @@ menu:
       url: /
       weight: 1
 
+# The blog home repeats the latest news from the portfolio. Mount the
+# portfolio's index.html as an asset so partials/news.html can read it at
+# build time: one list of news, edited in index.html only.
+module:
+  mounts:
+    # Declaring any assets mount replaces the default one, so restate it.
+    - source: assets
+      target: assets
+    - source: ../index.html
+      target: assets/portfolio/index.html
+
 outputs:
   home:
     - HTML

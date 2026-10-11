@@ -14,3 +14,9 @@ module:
       target: static
     - source: ../images
       target: static/images
+    # This list replaces the one in ../../hugo.yaml rather than adding to
+    # it, so repeat the assets mounts from there.
+    - source: assets
+      target: assets
+    - source: ../index.html
+      target: assets/portfolio/index.html

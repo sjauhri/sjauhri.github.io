@@ -1,0 +1,70 @@
+{{- /* Latest news on the blog home, read at build time from the portfolio's
+       index.html (mounted as assets/portfolio/index.html in hugo.yaml), so
+       news is only ever edited in one place. Takes the rows of the
+       portfolio's .news-table: a date cell, then a text cell. */ -}}
+{{- $limit := 6 -}}
+{{- with resources.Get "portfolio/index.html" -}}
+  {{- $table := index (findRE `(?s)<table class="news-table".*?</table>` .Content 1) 0 -}}
+  {{- $rows := findRESubmatch `(?s)<tr>\s*<td[^>]*>(.*?)</td>\s*<td[^>]*>(.*?)</td>\s*</tr>` $table -}}
+  {{- if $rows }}
+<section class="home-news" aria-labelledby="home-news-title">
+  <h2 id="home-news-title" class="home-posts-heading">News:</h2>
+  <ul>
+    {{- range first $limit $rows }}
+    {{- /* Portfolio links to the blog as /blog/...; point them at this
+           build's base URL so they also work in the local preview. */ -}}
+    {{- $text := replace (index . 2) `href="/blog/` (printf `href="%s` ("" | absURL)) }}
+    <li>
+      <span class="home-news-date">{{ index . 1 | safeHTML }}</span>
+      <span class="home-news-text">{{ $text | safeHTML }}</span>
+    </li>
+    {{- end }}
+  </ul>
+  {{- if gt (len $rows) $limit }}
+  <p class="home-news-more"><a href="https://sjauhri.github.io/">All news on website &rarr;</a></p>
+  {{- end }}
+</section>
+<style>
+  .home-news {
+    margin-top: calc(var(--gap) * 2);
+  }
+
+  .home-news ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-news li {
+    display: grid;
+    grid-template-columns: 6.5em 1fr;
+    gap: 0.25em 1em;
+    padding: 0.45em 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--content);
+  }
+
+  .home-news-date {
+    color: var(--secondary);
+    white-space: nowrap;
+  }
+
+  .home-news a {
+    box-shadow: 0 1px 0 var(--accent, var(--primary));
+  }
+
+  .home-news-more {
+    margin-top: 0.9em;
+    font-size: 15px;
+  }
+
+  @media (max-width: 500px) {
+    .home-news li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+  {{- end }}
+{{- end -}}
