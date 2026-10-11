@@ -138,10 +138,10 @@ MolmoBot was accepted as an Oral at the Conference on Robot Learning (CoRL) 2026
 <section class="references" aria-labelledby="references">
 <h2 id="references">References</h2>
 <ol>
-  <li id="ref-1">N. Rudin, D. Hoeller, P. Reist, M. Hutter. <a href="https://arxiv.org/abs/2109.11978">Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning</a>. CoRL 2021.</li>
+  <li id="ref-1">N. Rudin, D. Hoeller, P. Reist, M. Hutter. <a href="https://arxiv.org/abs/2109.11978">Learning to Walk in Minutes Using Massively Parallel Deep Reinforcement Learning</a>. Conference on Robot Learning (CoRL) 2021.</li>
   <li id="ref-2">J. Tobin, R. Fong, A. Ray, J. Schneider, W. Zaremba, P. Abbeel. <a href="https://arxiv.org/abs/1703.06907">Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World</a>. IROS 2017.</li>
   <li id="ref-3">S. Jauhri, I. Lunawat, G. Chalvatzaki. <a href="https://arxiv.org/abs/2306.07392">NeuGraspNet: Learning Any-View 6DoF Robotic Grasping in Cluttered Scenes via Neural Surface Rendering</a>. RSS 2024.</li>
-  <li id="ref-4">S. Jauhri*, A. Deshpande*, M. Guru*, R. Hendrix*, et al. <a href="https://arxiv.org/abs/2603.16861">MolmoB0T: Large-Scale Simulation Enables Zero-Shot Manipulation</a>. CoRL 2026.</li>
+  <li id="ref-4">S. Jauhri*, A. Deshpande*, M. Guru*, R. Hendrix*, et al. <a href="https://arxiv.org/abs/2603.16861">MolmoB0T: Large-Scale Simulation Enables Zero-Shot Manipulation</a>. Conference on Robot Learning (CoRL) 2026.</li>
   <li id="ref-5">Y. Kim, W. Pumacay, O. Rayyan, et al. <a href="https://arxiv.org/abs/2602.11337">MolmoSpaces: Large-Scale Open Ecosystem for Robot Manipulation and Navigation</a>. RSS 2026.</li>
   <li id="ref-6">A. Khazatsky et al. <a href="https://arxiv.org/abs/2403.12945">DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset</a>. RSS 2024.</li>
   <li id="ref-7">R. Gong, X. Zhang, J. Shang, et al. <a href="https://arxiv.org/abs/2512.17853">AnyTask: An Automated Task and Data Generation Framework for Advancing Sim-to-Real Policy Learning</a>. arXiv 2025.</li>
