@@ -9,6 +9,9 @@
   {{- if strings.Contains . "<figure" -}}
     {{- partial "figures.html" $ -}}
   {{- end -}}
+  {{- if strings.Contains . `class="references"` -}}
+    {{- partial "references.html" $ -}}
+  {{- end -}}
   {{- if strings.Contains . "tabfig-panel" -}}
     {{- partial "tabfig.html" $ -}}
   {{- end -}}

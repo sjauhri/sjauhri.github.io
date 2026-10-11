@@ -1,0 +1,64 @@
+{{- /* Numbered citations ([1], [2], …) and the References list at the end of
+       a post. Loaded only on pages that have a <section class="references">.
+       The accent colour (partials/accent.html) marks citations and the list,
+       a little stronger than elsewhere on the blog. */ -}}
+<style>
+  /* :not(.anchor) matches the theme's .md-content a:not(.anchor) rule's
+     specificity so these win regardless of stylesheet order. */
+  .post-content a.cite:not(.anchor) {
+    color: var(--accent);
+    font-size: 0.85em;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .post-content a.cite:not(.anchor):hover {
+    text-decoration: underline;
+  }
+
+  .post-content .references {
+    margin-top: 2.5em;
+    padding-top: 1em;
+    border-top: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--secondary);
+  }
+
+  .post-content .references h2 {
+    margin: 0 0 0.6em;
+    font-size: 16px;
+    color: var(--accent);
+  }
+
+  .post-content .references ol {
+    margin: 0;
+    padding-inline-start: 1.8em;
+  }
+
+  .post-content .references li {
+    margin: 0.35em 0;
+    scroll-margin-top: 1.5em;
+  }
+
+  .post-content .references li::marker {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .post-content .references a:not(.anchor) {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post-content .references a:not(.anchor):hover {
+    text-decoration: underline;
+  }
+
+  /* The entry a citation jumped to. */
+  .post-content .references li:target {
+    background: var(--accent-soft);
+    border-radius: 4px;
+  }
+</style>
