@@ -171,8 +171,16 @@
   }
   .post-entry:hover, .post-entry:focus-within { transform: none; }
   :is(.post-entry, .first-entry:not(.home-info)) { flex-wrap: wrap; }
-  :is(.post-entry, .first-entry:not(.home-info)) .entry-content { display: none; }
-  /* The cover GIF and its caption sit above the title line, full width. */
+  /* The summary sits under the title line, full width. */
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-content {
+    order: 4;
+    flex: 0 0 100%;
+    margin: 2px 0 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--secondary);
+  }
+  /* The cover GIF sits above the title line, full width. */
   :is(.post-entry, .first-entry:not(.home-info)) .entry-cover {
     order: -1;
     flex: 0 0 100%;
@@ -182,14 +190,6 @@
   :is(.post-entry, .first-entry:not(.home-info)) .entry-cover img {
     width: 80%;
     margin-inline: auto;
-  }
-  .entry-cover figcaption {
-    margin-top: 4px;
-    font-size: 12px;
-    line-height: 1.6;
-    color: var(--primary);
-    opacity: 0.6;
-    text-align: center;
   }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header { flex: 0 1 auto; margin: 0; }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header h2 {
