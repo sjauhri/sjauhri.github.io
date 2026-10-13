@@ -188,8 +188,11 @@
     text-align: center;
   }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-cover img {
-    width: 80%;
+    width: 50%;
     margin-inline: auto;
+  }
+  @media (max-width: 640px) {
+    :is(.post-entry, .first-entry:not(.home-info)) .entry-cover img { width: 100%; }
   }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header { flex: 0 1 auto; margin: 0; }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header h2 {
