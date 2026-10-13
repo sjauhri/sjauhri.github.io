@@ -170,8 +170,26 @@
     border: 0;
   }
   .post-entry:hover, .post-entry:focus-within { transform: none; }
-  :is(.post-entry, .first-entry:not(.home-info)) :is(.entry-cover, .entry-content) {
-    display: none;
+  :is(.post-entry, .first-entry:not(.home-info)) { flex-wrap: wrap; }
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-content { display: none; }
+  /* The cover GIF and its caption sit above the title line, full width. */
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-cover {
+    order: -1;
+    flex: 0 0 100%;
+    margin: 0 0 12px;
+    text-align: center;
+  }
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-cover img {
+    width: 80%;
+    margin-inline: auto;
+  }
+  .entry-cover figcaption {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--primary);
+    opacity: 0.6;
+    text-align: center;
   }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header { flex: 0 1 auto; margin: 0; }
   :is(.post-entry, .first-entry:not(.home-info)) .entry-header h2 {
