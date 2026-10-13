@@ -127,13 +127,25 @@ The open question for me is how far this scales: which kinds of variation matter
 
 ## Other recent progress
 
-MolmoBot is one of several recent results pointing the same way. Most of them follow one of three recipes.
+MolmoBot is not the only recent result pointing this way. AnyTask <a class="cite" href="#ref-10">[10]</a> from RAI automates task and data generation for sim-to-real policy learning, and SimVLA <a class="cite" href="#ref-11">[11]</a> trains a mobile-manipulation policy entirely in procedurally generated houses and runs it zero-shot in real homes.
 
-The first is synthetic data for generalist policies. GraspVLA <a class="cite" href="#ref-10">[10]</a> pretrains a grasping model on a billion frames of synthetic data and grasps real objects zero-shot, and InternData-A1 <a class="cite" href="#ref-11">[11]</a> shows that a π0-style model pretrained only on simulated trajectories can match the official π0. AnyTask <a class="cite" href="#ref-12">[12]</a> from RAI automates task and data generation for sim-to-real policy learning. Very recently, SimVLA <a class="cite" href="#ref-13">[13]</a> trained a mobile-manipulation policy entirely in procedurally generated houses and ran it zero-shot in real homes, and SimWeaver <a class="cite" href="#ref-14">[14]</a> reports zero-shot RGB transfer on deformable objects such as plastic bags.
+Another route is large-scale reinforcement learning in simulation, distilled into a policy that sees only RGB. Zhang et al. <a class="cite" href="#ref-12">[12]</a> from the University of Washington scale RL to around a million parallel environments and transfer zero-shot to real assembly tasks such as gear insertion. DoorMan <a class="cite" href="#ref-13">[13]</a> from NVIDIA uses a similar recipe to teach a humanoid to open real doors.
 
-The second is large-scale reinforcement learning in simulation, distilled into a vision policy. Zhang et al. <a class="cite" href="#ref-15">[15]</a> from the University of Washington scale RL to around a million parallel environments and transfer RGB policies zero-shot to real assembly tasks. DextrAH-RGB <a class="cite" href="#ref-16">[16]</a> does this for dexterous grasping from stereo RGB, and VIRAL <a class="cite" href="#ref-17">[17]</a> and DoorMan <a class="cite" href="#ref-18">[18]</a> for humanoid loco-manipulation and door opening.
+<figure>
+  <img src="/images/sim2real-balanced-data-diet.jpg" loading="lazy"
+       alt="A robot gripper inserting a gear in simulation, next to a real UR5e robot doing the same.">
+  <figcaption>
+    <p>Gear insertion in simulation (left) and zero-shot on a real UR5e (right) <a class="cite" href="#ref-12">[12]</a>.</p>
+  </figcaption>
+</figure>
 
-The third is real-to-sim-to-real, which builds the simulation from scans of the real scene, as in RialTo <a class="cite" href="#ref-19">[19]</a> and SplatSim <a class="cite" href="#ref-20">[20]</a>.
+<figure>
+  <img src="/images/sim2real-doorman.jpg" loading="lazy"
+       alt="A simulated first-person camera view of a humanoid hand at a door handle, next to a real humanoid robot opening a door.">
+  <figcaption>
+    <p>DoorMan's simulated RGB view (left) and the real humanoid opening a door (right) <a class="cite" href="#ref-13">[13]</a>.</p>
+  </figcaption>
+</figure>
 
 It is an exciting time for sim2real in manipulation. Stay tuned for more on this!
 
@@ -153,16 +165,9 @@ MolmoBot was accepted as an Oral (top 3% of papers) at the Conference on Robot L
   <li id="ref-7">A. Khazatsky et al. <a href="https://arxiv.org/abs/2403.12945">DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset</a>. RSS 2024.</li>
   <li id="ref-8">K. Black et al. <a href="https://arxiv.org/abs/2410.24164">π0: A Vision-Language-Action Flow Model for General Robot Control</a>. arXiv 2024.</li>
   <li id="ref-9">Physical Intelligence. <a href="https://arxiv.org/abs/2504.16054">π0.5: a Vision-Language-Action Model with Open-World Generalization</a>. arXiv 2025.</li>
-  <li id="ref-10">S. Deng, M. Yan, S. Wei, H. Ma, Y. Yang, et al. <a href="https://arxiv.org/abs/2505.03233">GraspVLA: a Grasping Foundation Model Pre-trained on Billion-scale Synthetic Action Data</a>. Conference on Robot Learning (CoRL) 2025.</li>
-  <li id="ref-11">Y. Tian, Y. Yang, Y. Xie, Z. Cai, X. Shi, et al. <a href="https://arxiv.org/abs/2511.16651">InternData-A1: Pioneering High-Fidelity Synthetic Data for Pre-training Generalist Policy</a>. arXiv 2025.</li>
-  <li id="ref-12">R. Gong, X. Zhang, J. Shang, et al. <a href="https://arxiv.org/abs/2512.17853">AnyTask: An Automated Task and Data Generation Framework for Advancing Sim-to-Real Policy Learning</a>. arXiv 2025.</li>
-  <li id="ref-13">K. Baik, Y. Lee. <a href="https://arxiv.org/abs/2610.11248">SimVLA: Zero-Shot Sim-to-Real VLA Learning for Mobile Manipulation</a>. arXiv 2026.</li>
-  <li id="ref-14">W. Hu, H. Wang, Y. Li, L. Liu, M. Zhao, et al. <a href="https://arxiv.org/abs/2606.15338">SimWeaver: Zero-Shot RGB Sim-to-Real for Deformable Manipulation</a>. arXiv 2026.</li>
-  <li id="ref-15">O. Zhang, M. Guaman Castro, P. Yin, I. Dagnino, A. Gupta, R. Scalise, B. Boots. <a href="https://arxiv.org/abs/2610.12465">A Balanced Data Diet: Addressing the Exploration Bottleneck in Mega-Scale RL for Robot Control</a>. Conference on Robot Learning (CoRL) 2026.</li>
-  <li id="ref-16">R. Singh, A. Allshire, A. Handa, N. Ratliff, K. Van Wyk, et al. <a href="https://arxiv.org/abs/2412.01791">DextrAH-RGB: Visuomotor Policies to Grasp Anything with Dexterous Hands</a>. arXiv 2024.</li>
-  <li id="ref-17">T. He, Z. Wang, H. Xue, Q. Ben, Z. Luo, et al. <a href="https://arxiv.org/abs/2511.15200">VIRAL: Visual Sim-to-Real at Scale for Humanoid Loco-Manipulation</a>. arXiv 2025.</li>
-  <li id="ref-18">H. Xue, T. He, Z. Wang, Q. Ben, W. Xiao, et al. <a href="https://arxiv.org/abs/2512.01061">Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer</a>. arXiv 2025.</li>
-  <li id="ref-19">M. Torne, A. Simeonov, Z. Li, A. Chan, T. Chen, A. Gupta, P. Agrawal. <a href="https://arxiv.org/abs/2403.03949">Reconciling Reality through Simulation: A Real-to-Sim-to-Real Approach for Robust Manipulation</a>. RSS 2024.</li>
-  <li id="ref-20">M. N. Qureshi, S. Garg, F. Yandun, D. Held, G. Kantor, A. Silwal. <a href="https://arxiv.org/abs/2409.10161">SplatSim: Zero-Shot Sim2Real Transfer of RGB Manipulation Policies Using Gaussian Splatting</a>. arXiv 2024.</li>
+  <li id="ref-10">R. Gong, X. Zhang, J. Shang, et al. <a href="https://arxiv.org/abs/2512.17853">AnyTask: An Automated Task and Data Generation Framework for Advancing Sim-to-Real Policy Learning</a>. arXiv 2025.</li>
+  <li id="ref-11">K. Baik, Y. Lee. <a href="https://arxiv.org/abs/2610.11248">SimVLA: Zero-Shot Sim-to-Real VLA Learning for Mobile Manipulation</a>. arXiv 2026.</li>
+  <li id="ref-12">O. Zhang, M. Guaman Castro, P. Yin, I. Dagnino, A. Gupta, R. Scalise, B. Boots. <a href="https://arxiv.org/abs/2610.12465">A Balanced Data Diet: Addressing the Exploration Bottleneck in Mega-Scale RL for Robot Control</a>. Conference on Robot Learning (CoRL) 2026.</li>
+  <li id="ref-13">H. Xue, T. He, Z. Wang, Q. Ben, W. Xiao, et al. <a href="https://arxiv.org/abs/2512.01061">Opening the Sim-to-Real Door for Humanoid Pixel-to-Action Policy Transfer</a>. arXiv 2025.</li>
 </ol>
 </section>
