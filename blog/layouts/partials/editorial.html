@@ -1,14 +1,19 @@
-{{- /* Editorial look, on every page: one old-style book serif for everything
-       (Crimson Pro, a free stand-in for Warnock Pro), black on white with warm
-       greys, square corners, a 768px column and quiet, regular-weight
-       headings. Modelled on sophielwang.com/blog. Overrides PaperMod's
-       theme-vars.css; the accent colour stays in partials/accent.html. */ -}}
+{{- /* Editorial look, on every page, modelled on sophielwang.com/blog and
+       using its numbers: 16px text at line-height 1.5 in a 736px column,
+       28px medium-weight titles, 24/20px regular-weight headings, a 14px grey
+       meta line joined by "&&", 11px breadcrumbs and 12px captions. Crimson
+       Pro stands in for her Warnock Pro (Adobe-only); it runs slightly small,
+       so text is 17px rather than 16. Black on white with warm greys and
+       square corners. Overrides PaperMod's theme-vars.css; the accent colour
+       stays in partials/accent.html. */ -}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 <style>
   :root {
-    --main-width: 768px;
+    --main-width: 736px;
+    --gap: 16px;
+    --content-gap: 16px;
     --radius: 0;
     --serif: "Crimson Pro", "Warnock Pro", Georgia, "Times New Roman", serif;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -26,103 +31,183 @@
     --theme: #0a0a0a;
     --entry: #0a0a0a;
     --primary: #f6f5f4;
-    --content: #e3e1de;
+    --content: #f6f5f4;
     --secondary: #979087;
     --tertiary: #413e38;
     --border: #413e38;
     --code-bg: #1c1b19;
   }
 
-  /* One typeface everywhere: header, menu, meta, captions, post text. */
+  /* One typeface everywhere. */
   body, button, input, .post-content, .entry-content, .post-meta,
   .entry-footer, .breadcrumbs, svg.diagram text {
     font-family: var(--serif);
   }
 
-  body { font-size: 20px; line-height: 1.6; }
+  body { font-size: 17px; line-height: 1.5; }
+  .main { padding: 32px 16px; }
 
   code, pre, kbd { font-family: var(--mono); }
-  .md-content :not(pre) > code { font-size: 0.8em; }
+  .md-content :not(pre) > code {
+    font-size: 0.85em;
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    padding: 0 4px;
+  }
 
-  /* Square corners, as on the reference site. The round headshot stays. */
+  /* Square corners. The round headshot stays. */
   *, *::before, *::after { border-radius: 0 !important; }
   .logo a img { border-radius: 50% !important; }
 
   .list { background: var(--theme); }
 
-  /* Titles: medium weight and modest size, not a 40px poster. */
-  .post-title, .page-header h1, .first-entry .entry-header h1 {
-    font-size: 34px;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.005em;
+  /* ---------- header ---------- */
+  .nav { font-size: 15px; }
+  #menu a { font-size: 15px; }
+
+  /* ---------- breadcrumbs, title, meta ---------- */
+  .breadcrumbs {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    color: var(--secondary);
   }
+  .breadcrumbs a {
+    font-size: inherit;
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .breadcrumbs a:hover { color: var(--accent); }
+  .breadcrumbs .crumb-sep { margin-inline: 6px; color: var(--secondary); }
+
+  .post-header { margin: 0 0 32px; }
+
+  .post-title, .page-header h1 {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 8px;
+  }
+  .page-header { margin-bottom: 24px; }
 
   .post-description {
-    font-size: 21px;
-    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
     color: var(--secondary);
-    margin-block: 6px 4px;
+    margin: 0 0 8px;
   }
 
   .post-meta, .entry-footer {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.43;
     color: var(--secondary);
   }
-
-  /* Section headings: regular weight, separated by size and space alone. */
-  .md-content h2 {
-    font-size: 28px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin: 44px 0 12px;
+  .meta-sep {
+    margin-inline: 8px;
+    color: var(--accent);
+    opacity: 0.6;
   }
-  .md-content h3 {
-    font-size: 23px;
-    font-weight: 500;
-    margin: 32px 0 8px;
-  }
-  .md-content h2 + p, .md-content h3 + p { margin-top: 0; }
 
-  .md-content p, .md-content li { line-height: 1.6; }
-  .md-content ul { list-style: square; }
+  /* ---------- post body ---------- */
+  .post-content { line-height: 1.5; }
+  .md-content p, .md-content li { line-height: inherit; }
+  .md-content p { margin: 0 0 16px; }
+
+  .md-content h2, .md-content h3, .md-content h4 {
+    font-weight: 400;
+    line-height: 1.375;
+  }
+  .md-content h2 { font-size: 24px; margin: 32px 0 12px; }
+  .md-content h3 { font-size: 20px; margin: 24px 0 8px; }
+  .md-content h4 { font-size: 18px; margin: 24px 0 8px; }
+  .md-content :is(h2, h3, h4) + :is(p, ul, ol) { margin-top: 0; }
+
+  .md-content ul { list-style: square outside; padding-inline-start: 24px; }
+  .md-content ol { list-style: decimal outside; padding-inline-start: 24px; }
+  .md-content li + li { margin-top: 8px; }
+
+  /* Links: accent-coloured text with a thin underline. */
+  .md-content a:not(.anchor) {
+    color: var(--accent);
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .md-content a:not(.anchor):hover { text-decoration-style: dotted; }
 
   .md-content blockquote {
     border-inline-start: 1px solid var(--primary);
+    padding-inline-start: 16px;
     color: var(--secondary);
   }
 
-  /* Table of contents: a thin ruled box instead of a grey card. */
+  .md-content pre:not(figure *) { border: 1px solid var(--border); font-size: 14px; }
+
+  /* Table of contents: a ruled list, like her "Contents". */
   details.toc,
   [data-theme="dark"] details.toc {
     background: transparent;
     border: 0;
     border-inline-start: 1px solid var(--primary);
-    font-size: 17px;
+    font-size: 14px;
+    line-height: 1.625;
+    margin-bottom: 32px;
   }
+  details.toc summary { font-size: 16px; font-weight: 500; }
 
-  /* Post list: entries separated by hairlines, no floating cards. */
-  .post-entry {
+  /* ---------- post list: one line per post, dotted leader, date ---------- */
+  .post-entry, .first-entry:not(.home-info) {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-height: 0;
+    margin: 0;
+    padding: 2px 0;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-    margin-bottom: 0;
   }
   .post-entry:hover, .post-entry:focus-within { transform: none; }
-  .post-entry:hover .entry-header h2 { color: var(--accent); }
-  .entry-header h2 { font-size: 26px; font-weight: 500; line-height: 1.25; }
-  .entry-content { font-size: 18px; color: var(--secondary); line-height: 1.5; }
-  .home-info .entry-content { color: var(--content); }
+  :is(.post-entry, .first-entry:not(.home-info)) :is(.entry-cover, .entry-content) {
+    display: none;
+  }
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-header { flex: 0 1 auto; margin: 0; }
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-header h2 {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  :is(.post-entry, .first-entry:not(.home-info)):hover .entry-header h2 { color: var(--accent); }
+  :is(.post-entry, .first-entry:not(.home-info))::after {
+    content: "";
+    order: 2;
+    flex: 1 1 24px;
+    border-bottom: 1px dotted var(--tertiary);
+    transform: translateY(-4px);
+  }
+  :is(.post-entry, .first-entry:not(.home-info)) .entry-footer {
+    order: 3;
+    margin: 0;
+    font-size: 12px;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .entry-footer .meta-sep,
+  .entry-footer .meta-item ~ .meta-item { display: none; }
 
-  /* Header: name and menu in the same serif, no bold shouting. */
-  .logo a { font-weight: 500; }
-  #menu a { font-size: 18px; }
+  /* Home intro. */
+  .home-posts-heading, .news-heading { font-size: 24px; font-weight: 400; margin: 32px 0 12px; }
+  .home-info .entry-header h1 { font-size: 28px; font-weight: 500; }
+  .home-info .entry-content { font-size: 17px; color: var(--content); }
 
   @media (max-width: 640px) {
-    body { font-size: 19px; }
-    .post-title, .page-header h1, .first-entry .entry-header h1 { font-size: 29px; }
-    .md-content h2 { font-size: 25px; }
-    .md-content h3 { font-size: 21px; }
+    .post-title, .page-header h1, .home-info .entry-header h1 { font-size: 26px; }
+    .md-content h2 { font-size: 22px; }
+    .md-content h3 { font-size: 19px; }
   }
 </style>

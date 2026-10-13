@@ -1,0 +1,11 @@
+{{- /* Overrides the theme's breadcrumbs.html: small lowercase
+       "home / posts / page" trail above the title, as on sophielwang.com/blog.
+       The current page is the last, unlinked item. */ -}}
+{{- if (.Param "ShowBreadCrumbs") -}}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  {{- range $i, $bc := .Ancestors.Reverse }}
+    <a href="{{ $bc.RelPermalink }}">{{ if eq $i 0 }}home{{ else }}{{ lower (or $bc.LinkTitle $bc.Section) }}{{ end }}</a><span class="crumb-sep">/</span>
+  {{- end }}
+  <span aria-current="page">{{ if .File }}{{ .File.ContentBaseName | lower }}{{ else }}{{ lower .Title }}{{ end }}</span>
+</nav>
+{{- end -}}
