@@ -10,6 +10,7 @@ socialImage: "/images/molmobot-sim2real-card.jpg"
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
+  caption: 'MolmoBot policies trained only in randomized simulation, running zero-shot on real robots <a class="cite" href="#ref-5">[5]</a>.'
   relative: false
 ---
 
