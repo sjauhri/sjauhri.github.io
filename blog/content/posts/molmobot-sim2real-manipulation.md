@@ -13,13 +13,13 @@ cover:
   relative: false
 ---
 
-When I started my PhD in 2021, the state of embodied AI was roughly this: we had cool simulation demos, we had robot policies that could learn impressive behaviors in simulation, and we had very little that worked on an actual robot.
+When I started my PhD in 2021, embodied AI looked roughly like this. We had cool simulation demos, we had robot policies that could learn impressive behaviors in simulation, and we had very little that worked on an actual robot.
 
 Transfer from sim to real hardware was sparse. You could get it to work if you constrained the action space enough, or learned on top of some pre-existing robot skills, and even then success rates were low. Plenty of serious people doubted whether simulation policies would even transfer at all and argued that real-world data was the only relevant data.
 
 ## Robot Locomotion and the "Randomize & Learn" Button
 
-The breakthrough came from robot locomotion, specifically quadrupeds <a class="cite" href="#ref-1">[1]</a>. Researchers trained quadrupeds to walk in simulation, but randomized simulation rollouts such that each quadruped was trained in a slightly different world: different terrains (slopes, stairs, rough ground), ground friction, random shoves and noisy sensors. The complexity of these changes in environment was also oncreased over time as the trained policy improved.
+The breakthrough came from robot locomotion, specifically quadrupeds <a class="cite" href="#ref-1">[1]</a>. Researchers trained quadrupeds to walk in simulation, but randomized simulation rollouts such that each quadruped was trained in a slightly different world, with different terrains (slopes, stairs, rough ground), ground friction, random shoves and noisy sensors. The complexity of these changes in environment was also increased over time as the trained policy improved.
 
 <!-- This was domain randomization <a class="cite" href="#ref-2">[2]</a>, applied to physics and at scale. Instead of learning to walk in one simulator, the robot learns to walk across a whole range of plausible ones. -->
 
@@ -29,11 +29,11 @@ The breakthrough came from robot locomotion, specifically quadrupeds <a class="c
   <video src="/images/quadruped-parallel.mp4" autoplay muted loop playsinline preload="metadata"
          aria-label="ANYmal robots learning to walk in large-scale physics simulations."></video>
   <figcaption>
-    <p>ANYmal robots learning to walk in large-scale physics simulations<a class="cite" href="#ref-1">[1]</a>.</p>
+    <p>ANYmal robots learning to walk in large-scale physics simulations <a class="cite" href="#ref-1">[1]</a>.</p>
   </figcaption>
 </figure>
 
-This was domain randomization <a class="cite" href="#ref-2">[2]</a>, applied to physics adn dynamics and at scale, let's call it **large-scale physics randomization**. The big picture was that now they could transfer and run the same policy on the real robot with **no further training**. This recipe blew sim2real for locomotion **wide open**.
+This was domain randomization <a class="cite" href="#ref-2">[2]</a>, applied to physics and dynamics at scale. Let's call it **large-scale physics randomization**. The big picture was that now they could transfer and run the same policy on the real robot with **no further training**. This recipe blew sim2real for locomotion **wide open**.
 
 <!-- The second is the one I keep coming back to: the "randomize and learn" button. Every simulated robot gets a slightly different world: its own terrain (slopes, stairs, rough ground, getting harder as it improves), its own ground friction, random shoves and noisy sensors. One policy then learns to walk in all of them at once. This is domain randomization <a class="cite" href="#ref-2">[2]</a>, applied to physics and at scale. Instead of learning to walk in one simulator, the robot learns to walk across a whole range of plausible ones. -->
 
@@ -48,9 +48,9 @@ It might seem obvious now, but this was a big breakthrough back then, and went a
 
 Since then, researchers have been trying to bring the same capability to robot manipulation. But there hasn't been the same amount of success.
 
-Locomotion could get away with geometric perception, such as depth cameras or lidar. Manipulation usually can't: it needs fine-grained visual understanding of the scene, because many tasks depend on what things look like, not just their shape (for example, folding laundry and sorting it by color). Some tasks, like grasping, do work from depth alone <a class="cite" href="#ref-3">[3]</a>, and realistic depth is fairly easy to simulate. But the north star for manipulation is visual policies that map pixels directly to robot actions, since that is the most likely route to solving general-purpose manipulation.
+Locomotion could get away with geometric perception, such as depth cameras or lidar. Manipulation usually can't. It needs fine-grained visual understanding of the scene, because many tasks depend on what things look like, not just their shape (for example, folding laundry and sorting it by color). Some tasks, like grasping, do work from depth alone <a class="cite" href="#ref-3">[3]</a>, and realistic depth is fairly easy to simulate. But the north star for manipulation is visual policies that map pixels directly to robot actions, since that is the most likely route to solving general-purpose manipulation.
 
-Vision is also much harder to randomize <a class="cite" href="#ref-2">[2]</a>. For a walking robot, randomizing terrain and physics was enough: a quadruped's dynamics live in a smaller space. A camera in somebody's kitchen can see almost anything. So a visual policy needs whole environments that look realistic, with rooms, furniture, clutter, materials and lighting, and enough variety to cover the homes the robot will actually work in. Building and randomizing that many realistic scenes is a much harder task.
+Vision is also much harder to randomize <a class="cite" href="#ref-2">[2]</a>. For a walking robot, randomizing terrain and physics was enough, since a quadruped's dynamics live in a smaller space. A camera in somebody's kitchen can see almost anything. So a visual policy needs whole environments that look realistic, with rooms, furniture, clutter, materials and lighting, and enough variety to cover the homes the robot will actually work in. Building and randomizing that many realistic scenes is a much harder task.
 
 As a result, simulation for manipulation was largely left behind, widely seen as something that does not really work or does not pay dividends, and mainly useful for benchmarking.
 
@@ -58,31 +58,31 @@ As a result, simulation for manipulation was largely left behind, widely seen as
   <img src="/images/molmospaces.gif" loading="lazy"
        alt="Procedurally generated household environments from MolmoSpaces.">
   <figcaption>
-    <p>Procedurally generated households from MolmoSpaces <a class="cite" href="#ref-4">[4]</a>: the kind of
+    <p>Procedurally generated households from MolmoSpaces <a class="cite" href="#ref-4">[4]</a>, the kind of
     realistic, varied environments a visual policy needs.</p>
   </figcaption>
 </figure>
 
 ## Pressing the Button for Manipulation
 
-During my year-long research scientist internship at the Allen Institute for AI, I wanted to work on exactly this but for mobile manipulation. Mobile manipulation raises the bar further: a mobile manipulator can move through the entire scene, so the whole home has to be built and randomized, not just a tabletop. Ai2 had already seen visual sim2real work for household *navigation*, and the question was whether the recipe extended to manipulation and mobile manipulation.
+During my year-long research scientist internship at the Allen Institute for AI, I wanted to work on exactly this but for mobile manipulation. Mobile manipulation raises the bar further. A mobile manipulator can move through the entire scene, so the whole home has to be built and randomized, not just a tabletop. Ai2 had already seen visual sim2real work for household *navigation*, and the question was whether the recipe extended to manipulation and mobile manipulation.
 
-[MolmoB0T](https://allenai.github.io/MolmoBot/) <a class="cite" href="#ref-5">[5]</a> is our attempt at answering that. It builds on [MolmoSpaces](https://github.com/allenai/molmospaces) <a class="cite" href="#ref-4">[4]</a>: over 230K indoor environments, from handcrafted homes to procedurally generated multi-room houses, with 48K manipulable objects built from Objaverse assets and human-authored doors and articulated objects.
+[MolmoB0T](https://allenai.github.io/MolmoBot/) <a class="cite" href="#ref-5">[5]</a> is our attempt at answering that. It builds on [MolmoSpaces](https://github.com/allenai/molmospaces) <a class="cite" href="#ref-4">[4]</a>, which has over 230K indoor environments, from handcrafted homes to procedurally generated multi-room houses, and 48K manipulable objects built from Objaverse assets and human-authored doors and articulated objects.
 
 On top of that, we use fairly standard data generators that rely on ground-truth simulation information such as object poses, collision bodies and bounding boxes. They solve pick-and-place, door opening and articulated-object opening with IK controllers, collision-aware IK and cuRobo <a class="cite" href="#ref-6">[6]</a> motion planning.
 
-None of these ingredients is new. What we changed is the scale and the amount of variation: data generated across textures, lighting, object placement and dynamics, with the aim of making real-world observations look like just another sample from the training distribution.
+None of these ingredients is new. What we changed is the scale and the amount of variation. We generated data across textures, lighting, object placement and dynamics, with the aim of making real-world observations look like just another sample from the training distribution.
 
 <figure>
   <video src="/images/molmobot-data.mp4" autoplay muted loop playsinline preload="metadata"
          aria-label="Simulated robots performing manipulation tasks across many procedurally generated households, zooming out to thousands of episodes."></video>
   <figcaption>
-    <p>MolmoBot data generation: the same tasks generated across thousands of
+    <p>MolmoBot data generation, with the same tasks generated across thousands of
     randomized households <a class="cite" href="#ref-5">[5]</a>.</p>
   </figcaption>
 </figure>
 
-For a sense of scale: MolmoBot-Data is 1.7 million trajectories across more than 94,000 environments and 11,000 objects, roughly 5,700 robot-hours of experience. Every episode is randomized on top of that: where objects are placed and how they are oriented, the number, position, color and intensity of the lights, the surface textures (both procedural and real-world texture maps), the camera poses, and physical parameters such as friction, object mass and joint damping.
+For a sense of scale, MolmoBot-Data is 1.7 million trajectories across more than 94,000 environments and 11,000 objects, roughly 5,700 robot-hours of experience. Every episode is randomized on top of that. We vary where objects are placed and how they are oriented, the number, position, color and intensity of the lights, the surface textures (both procedural and real-world texture maps), the camera poses, and physical parameters such as friction, object mass and joint damping.
 
 ## The New Workflow for Sim2Real Manipulation
 
@@ -93,7 +93,7 @@ The bigger change is in how you build a manipulation policy. Even a policy proto
 With enough randomization, the workflow starts to look like the locomotion one:
 
 1. **Write a data generator** for the task in simulation. The simulator knows every object's pose and geometry, so a scripted planner can solve the task without any learning.
-2. **Press "randomize": generate data at scale.** Run the generator across thousands of households, randomizing the objects, textures, lighting, camera poses and robot setup in every episode. This is the step that large-scale households and randomization make possible, and it is the manipulation version of locomotion's "randomize physics" button.
+2. **Press "randomize" and generate data at scale.** Run the generator across thousands of households, randomizing the objects, textures, lighting, camera poses and robot setup in every episode. This is the step that large-scale households and randomization make possible, and it is the manipulation version of locomotion's "randomize physics" button.
 3. **Train a visual policy via imitation learning** on the generated demonstrations.
 4. **Deploy it zero-shot** on a real arm or mobile manipulator.
 
@@ -124,9 +124,9 @@ Not so fast!
 For rigid-body manipulation and mobile manipulation, partly. In our pick-and-place tests the policy reaches about 80% success zero-shot, which is a useful starting point for fine-tuning with real data.
 
 {{< figure-svg src="zero-shot-results.svg"
-    caption="Zero-shot pick-and-place on a Franka FR3: 120 real-world trials, no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 <a class='cite' href='#ref-8'>[8]</a> architecture and swaps in simulation data, so much of the gain comes from the data. The baseline is π0.5 <a class='cite' href='#ref-9'>[9]</a> trained on DROID <a class='cite' href='#ref-10'>[10]</a>. Results from <a class='cite' href='#ref-5'>[5]</a>." >}}
+    caption="Zero-shot pick-and-place on a Franka FR3, over 120 real-world trials with no real-world fine-tuning. MolmoBot-Pi0 keeps the π0 <a class='cite' href='#ref-8'>[8]</a> architecture and swaps in simulation data, so much of the gain comes from the data. The baseline is π0.5 <a class='cite' href='#ref-9'>[9]</a> trained on DROID <a class='cite' href='#ref-10'>[10]</a>. Results from <a class='cite' href='#ref-5'>[5]</a>." >}}
 
-For deformable and soft objects, and for more complex objects in general, it remains to be seen. But the results are promising!
+For deformable and soft objects, and for more complex objects in general, it remains to be seen. Simultion fidelity can also be a bottleneck for tasks that require very precise physics. But the current results are promising!
 
 The open question for me is how far this scales and how many more we can add. There is still a lot left to vary.
 
@@ -151,6 +151,10 @@ A complementary direction is large-scale reinforcement learning in simulation, d
     <p>DoorMan in simulation with randomized doors, walls and lighting (left three) and opening a real door zero-shot (right) <a class="cite" href="#ref-14">[14]</a>.</p>
   </figcaption>
 </figure>
+
+Taken together, these results point the same way. With enough scale and randomization, simulation is becoming a real source of training data for manipulation. The policy can imitate generated demonstrations, be trained with parallel RL and distilled into vision policies, or combine the two, with imitation pretraining followed by RL fine-tuning.
+
+There is still plenty to improve around this workflow. We need more household environments, and more realistic ones. We need better data generators, and agentic pipelines are already proving quite capable here. And we need simulators and physics engines that come closer to reality.
 
 It is an exciting time for sim2real in manipulation. Stay tuned for more on this!
 
