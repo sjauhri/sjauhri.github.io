@@ -101,7 +101,7 @@ h2 {
 a.diary-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-size: 22px;
   text-decoration: none;
 }
@@ -113,8 +113,8 @@ a.diary-link span {
 }
 
 a.diary-link .diary-icon {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
