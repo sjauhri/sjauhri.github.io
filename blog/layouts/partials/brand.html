@@ -1,0 +1,50 @@
+{{- /* Two-line header brand: the name comes from params.label.text (real text,
+       and the link's accessible name), the blog line is added here.
+
+       Done in CSS rather than by overriding the theme's header.html, which is
+       114 lines of nav, menus and toggles — forking all of it to add one line
+       would mean losing future theme fixes. The theme prints the label as a
+       bare text node, so a grid places the icon in a spanned first column and
+       lets the name and the blog line stack beside it. */ -}}
+<style>
+  /* Width of the logo icon plus its gap, so anything below the brand can line
+     up with the name rather than the icon. Derived from the config so the two
+     cannot drift apart. */
+  :root {
+    --brand-indent: calc({{ site.Params.label.iconHeight | default 30 }}px + 0.45rem);
+  }
+
+  .logo a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon name"
+      "icon sub";
+    column-gap: 0.45rem;
+    align-items: center;
+    line-height: 1.18;
+  }
+
+  .logo a img {
+    grid-area: icon;
+    margin-inline-end: 0;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* The blog line: quieter and smaller so the name stays the anchor. */
+  .logo a::after {
+    grid-area: sub;
+    content: "{{ site.Params.brandSubtitle | default "Research diary" }}";
+    font-size: 0.62em;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    opacity: 0.72;
+  }
+
+  /* Narrow screens: keep both lines readable rather than shrinking further. */
+  @media (max-width: 500px) {
+    .logo a { column-gap: 0.35rem; }
+    .logo a::after { font-size: 0.6em; }
+  }
+</style>

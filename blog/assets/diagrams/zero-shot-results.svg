@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 248" class="diagram"
+     role="img" aria-labelledby="zs-title zs-desc">
+  <title id="zs-title">Zero-shot real-world pick-and-place success</title>
+  <desc id="zs-desc">Success rate on a Franka FR3 over 120 real-world trials, no
+    real-world fine-tuning. MolmoBot, trained on simulation data only: 79.2%.
+    MolmoBot-Pi0, the pi-zero architecture trained on simulation data only:
+    46.7%. pi-zero-point-five fine-tuned on DROID real-world teleoperation
+    data: 39.2%.</desc>
+
+  <!-- Numbers from the MolmoB0T paper (arXiv 2603.16861): abstract and Fig. 7.
+       Bars run from x=260; 100% = 440px. Colours come from the page stylesheet
+       (partials/figures.html) so the chart follows the theme toggle. -->
+
+  <!-- grid -->
+  <g class="dg-edge" stroke-dasharray="2 4">
+    <line x1="370" y1="18" x2="370" y2="214"/>
+    <line x1="480" y1="18" x2="480" y2="214"/>
+    <line x1="590" y1="18" x2="590" y2="214"/>
+    <line x1="700" y1="18" x2="700" y2="214"/>
+  </g>
+  <line class="dg-edge" x1="260" y1="18" x2="260" y2="214"/>
+  <g class="dg-muted dg-t" text-anchor="middle">
+    <text x="260" y="234">0%</text>
+    <text x="370" y="234">25%</text>
+    <text x="480" y="234">50%</text>
+    <text x="590" y="234">75%</text>
+    <text x="700" y="234">100%</text>
+  </g>
+
+  <!-- MolmoBot: 79.2% -> 348.5px -->
+  <g>
+    <title>MolmoBot (simulation data only): 79.2%</title>
+    <text class="dg-ink dg-h" x="0" y="46">MolmoBot</text>
+    <text class="dg-muted dg-t" x="0" y="64">simulation data only</text>
+    <path class="dg-acc-fill" d="M260 36 H604.5 a4 4 0 0 1 4 4 V62 a4 4 0 0 1 -4 4 H260 Z"/>
+    <text class="dg-ink dg-s dg-strong" x="618" y="56">79.2%</text>
+  </g>
+
+  <!-- MolmoBot-Pi0: 46.7% -> 205.5px -->
+  <g>
+    <title>MolmoBot-Pi0 (π0 architecture, simulation data only): 46.7%</title>
+    <text class="dg-ink dg-h" x="0" y="112">MolmoBot-Pi0</text>
+    <text class="dg-muted dg-t" x="0" y="130">π0 architecture, simulation data only</text>
+    <path class="dg-acc-fill" d="M260 102 H461.5 a4 4 0 0 1 4 4 V128 a4 4 0 0 1 -4 4 H260 Z"/>
+    <text class="dg-ink dg-s dg-strong" x="475" y="122">46.7%</text>
+  </g>
+
+  <!-- π0.5-DROID: 39.2% -> 172.5px -->
+  <g>
+    <title>π0.5-DROID (real-world teleop data): 39.2%</title>
+    <text class="dg-ink dg-h" x="0" y="178">π0.5-DROID</text>
+    <text class="dg-muted dg-t" x="0" y="196">real-world teleop data</text>
+    <path class="dg-muted" d="M260 168 H428.5 a4 4 0 0 1 4 4 V194 a4 4 0 0 1 -4 4 H260 Z"/>
+    <text class="dg-ink dg-s dg-strong" x="442" y="188">39.2%</text>
+  </g>
+</svg>

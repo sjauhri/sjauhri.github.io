@@ -1,0 +1,15 @@
+{{- /* Render math at build time with Hugo's embedded KaTeX. No client-side JS,
+       so formulas are in the HTML and render even with JS disabled. */ -}}
+{{- /* output=mathml keeps the blog self-contained: browsers render MathML
+       natively, so there is no KaTeX stylesheet or CDN to depend on, and math
+       is selectable and screen-reader accessible. Switching to
+       "htmlAndMathml" gives slightly finer typography but then katex.min.css
+       becomes REQUIRED — without it every formula renders three times. */ -}}
+{{- $opts := dict "displayMode" (eq .Type "block") "output" "mathml" -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- with .Err -}}
+    {{- errorf "KaTeX failed at %s: %s" $.Position . -}}
+  {{- else -}}
+    {{- .Value -}}
+  {{- end -}}
+{{- end -}}

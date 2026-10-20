@@ -1,0 +1,147 @@
+baseURL: "https://sjauhri.github.io/blog/"
+languageCode: "en-us"
+title: "Snehal Jauhri — Research Diary"
+theme: PaperMod
+pagination:
+  pagerSize: 10
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+# No tags or categories: too few posts for them to help. Drops the /tags/ and
+# /categories/ pages and the tag list under each post.
+taxonomies: {}
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+params:
+  env: production
+  title: "Snehal Jauhri — Research Diary"
+  # Shown in search results and social cards, so plain text and under ~155 chars.
+  description: "Thoughts on AI that acts, not just answers: embodied and physical AI, interactive 3D worlds, and how agents learn to act in them."
+  author: Snehal Jauhri
+  # Share-card image (1200x630) for pages without their own, e.g. the home
+  # page. Relative, so it resolves to <baseURL>/images/blog-card.jpg
+  # (blog/static/images/).
+  images:
+    - "images/blog-card.jpg"
+  defaultTheme: light
+  disableThemeToggle: false
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  assets:
+    disableHLJS: false
+    # Paths are resolved with absURL against baseURL, so keep them relative.
+    # Files live in blog/static/ and are generated at blog/static/*.
+    favicon: "favicon.ico"
+    favicon16x16: "favicon-16x16.png"
+    favicon32x32: "favicon-32x32.png"
+    apple_touch_icon: "apple-touch-icon.png"
+    safari_pinned_tab: "safari-pinned-tab.svg"
+
+  homeInfoParams:
+    Title: "Hi, I'm Snehal"
+    # Literal block (|) not folded (>): Markdown needs real blank lines to make
+    # separate paragraphs, and > collapses them into single newlines.
+    Content: |
+      Post-Doctoral researcher at the [3D AI Lab](https://www.3dunderstanding.org/) at TU Munich.
+      
+      **I post my thoughts here on Interactive AI**: embodied and physical AI,
+      interactive 3D worlds, and how agents and robots can learn to act in them.
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/sjauhri"
+    - name: googlescholar
+      url: "https://scholar.google.com/citations?user=Hx_XWGEAAAAJ&hl=en"
+    - name: linkedin
+      title: LinkedIn
+      url: "https://www.linkedin.com/in/snehaljauhri/"
+    - name: twitter
+      url: "https://twitter.com/SnehalJauhri"
+
+  # Header brand. label.text is the name (also the link's accessible name);
+  # brandSubtitle is the second line, rendered by partials/brand.html.
+  label:
+    text: "Snehal Jauhri"
+    # Square crop of the portfolio headshot (images/snehal.jpg), shown round.
+    icon: logo.jpg
+    iconHeight: 48
+  brandSubtitle: "Research diary"
+
+  cover:
+    hidden: false
+    hiddenInList: false
+    hiddenInSingle: false
+
+menu:
+  main:
+    # Paths here resolve relative to baseURL (which already ends in /blog/),
+    # so they must NOT be prefixed with /blog. Website needs an absolute
+    # URL to escape the /blog/ subpath and reach the site root.
+    - identifier: website
+      name: Website
+      url: https://sjauhri.github.io/
+      weight: 10
+    - identifier: posts
+      name: Posts
+      url: /
+      weight: 1
+
+# The blog home repeats the latest news from the portfolio. Mount the
+# portfolio's index.html as an asset so partials/news.html can read it at
+# build time: one list of news, edited in index.html only.
+module:
+  mounts:
+    # Declaring any assets mount replaces the default one, so restate it.
+    - source: assets
+      target: assets
+    - source: ../index.html
+      target: assets/portfolio/index.html
+
+outputs:
+  home:
+    - HTML
+    - RSS
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      # Protects math from Markdown processing. Without this, Goldmark eats the
+      # underscores in $\mathbb{E}_\tau$ as emphasis before math is rendered.
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['$$', '$$']
+            - ['\[', '\]']
+          inline:
+            - ['$', '$']
+            - ['\(', '\)']
+  highlight:
+    noClasses: false
+    anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    style: monokai

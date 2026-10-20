@@ -1,0 +1,38 @@
+{{- /* A third colour for the blog, on top of PaperMod's black and white.
+       Kept to a few places so it reads as a detail, not a theme: link
+       underlines and hovers, the active menu item, the brand line under the
+       name, selections, and the accent in diagrams (partials/figures.html).
+       Headings and body text stay neutral. */ -}}
+<style>
+  :root {
+    --accent: #8b1a2b;
+    --accent-soft: #f5e6e8;
+  }
+
+  :root[data-theme="dark"] {
+    --accent: #d9707e;
+    --accent-soft: #3b2327;
+  }
+
+  .md-content a:not(.anchor) {
+    text-decoration-color: var(--accent);
+  }
+
+  .md-content a:not(.anchor):hover,
+  .contact-bar a:hover {
+    color: var(--accent);
+  }
+
+  .menu .active {
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+
+  .logo a::after {
+    color: var(--accent);
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+  }
+</style>

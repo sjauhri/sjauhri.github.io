@@ -1,0 +1,25 @@
+{{- /* One tab inside {{< tabs >}}. Registers itself with the parent, which
+       does all the rendering — see layouts/shortcodes/tabs.html for why.
+
+       Params: title (the tab label, required), heading, src, poster, alt, icon.
+       Inner content, if any, becomes the description and may use markdown. */ -}}
+
+{{- if not .Parent -}}
+  {{- errorf "tab: must be used inside {{< tabs >}} (at %s)" .Position -}}
+{{- else if not (.Get "title") -}}
+  {{- errorf "tab: needs a title param (at %s)" .Position -}}
+{{- else -}}
+  {{- $desc := "" -}}
+  {{- if .InnerDeindent -}}
+    {{- $desc = .InnerDeindent | markdownify -}}
+  {{- end -}}
+  {{- .Parent.Store.Add "tabs" (slice (dict
+        "title"   (.Get "title")
+        "heading" (.Get "heading")
+        "src"     (.Get "src")
+        "poster"  (.Get "poster")
+        "alt"     (.Get "alt")
+        "icon"    (.Get "icon")
+        "desc"    $desc
+      )) -}}
+{{- end -}}

@@ -1,0 +1,12 @@
+{{- /* Overrides the theme's post_meta.html. Date and reading time only (the
+       blog has one author), dates written out ("September 10, 2026"), and "&&" between items, as
+       on sophielwang.com/blog. Each item is a .meta-item so the post list can
+       show just the date. */ -}}
+{{- $items := slice -}}
+{{- if not .Date.IsZero -}}
+  {{- $items = $items | append (printf `<span class="meta-item" title="%s">%s</span>` (.Date | time.Format "2006-01-02") (.Date | time.Format ":date_long")) -}}
+{{- end -}}
+{{- if (.Param "ShowReadingTime") -}}
+  {{- $items = $items | append (printf `<span class="meta-item">%d min read</span>` .ReadingTime) -}}
+{{- end -}}
+{{- delimit $items `<span class="meta-sep" aria-hidden="true">&amp;&amp;</span>` | safeHTML -}}

@@ -1,0 +1,17 @@
+{{- /* Math is rendered to MathML at build time by
+       layouts/_markup/render-passthrough.html and browsers style it natively,
+       so no external stylesheet is needed. These few rules just give display
+       equations room to breathe and stop long ones overflowing on mobile. */ -}}
+<style>
+  math { font-size: 1.05em; }
+  /* width:fit-content + auto margins centres the equation box; max-width plus
+     overflow-x lets a long equation scroll instead of breaking the layout. */
+  math[display="block"] {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 1.1em auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+</style>

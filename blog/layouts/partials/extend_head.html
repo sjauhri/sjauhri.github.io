@@ -1,0 +1,37 @@
+{{- /* Two-line header brand (name + blog line) on every page. */ -}}
+{{- partial "brand.html" . -}}
+
+{{- /* Serif editorial typography and palette, on every page. */ -}}
+{{- partial "editorial.html" . -}}
+
+{{- /* Maroon accent colour, on every page. */ -}}
+{{- partial "accent.html" . -}}
+
+{{- /* Figure and caption styling, only where a post uses one. */ -}}
+{{- with .Content -}}
+  {{- if strings.Contains . "<figure" -}}
+    {{- partial "figures.html" $ -}}
+  {{- end -}}
+  {{- if strings.Contains . `class="references"` -}}
+    {{- partial "references.html" $ -}}
+  {{- end -}}
+  {{- if strings.Contains . "tabfig-panel" -}}
+    {{- partial "tabfig.html" $ -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Add the math styles only on pages that actually contain math.
+       Detection is automatic — server-side rendering puts a <math> element in
+       the content — so there is no frontmatter flag to forget. The math param
+       still works as an explicit override. */ -}}
+{{- $hasMath := or .Params.math site.Params.math -}}
+{{- if not $hasMath -}}
+  {{- with .Content -}}
+    {{- if strings.Contains . "<math" -}}
+      {{- $hasMath = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $hasMath -}}
+  {{- partial "math.html" . -}}
+{{- end -}}
