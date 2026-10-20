@@ -46,7 +46,7 @@ jobs:
           publish=true
           reason="push to ${GITHUB_REF_NAME}"
 
-          # Read the message via git rather than a ${{ }} expression: a commit
+          # Read the message via git rather than a workflow expression: a commit
           # message is untrusted text and must never be interpolated into a
           # shell script.
           msg="$(git log -1 --pretty=%B)"
