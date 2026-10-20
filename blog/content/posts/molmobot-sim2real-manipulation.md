@@ -10,7 +10,7 @@ socialImage: "/images/molmobot-sim2real-card.jpg"
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
-  caption: 'MolmoBot policies trained only in randomized simulation, running zero-shot on real robots <a class="cite" href="#ref-5">[5]</a>.'
+  caption: 'MolmoBot mobile manipulation policies trained only in randomized simulation, running zero-shot on the real robot <a class="cite" href="#ref-5">[5]</a>.'
   relative: false
 ---
 
@@ -98,9 +98,9 @@ With enough randomization, the workflow starts to look like the locomotion one:
 3. **Train a visual policy via imitation learning** on the generated demonstrations.
 4. **Deploy it zero-shot** on a real arm or mobile manipulator.
 
-When the policy fails on the real robot, you can often fix the simulation, for example by randomizing something you missed, and generate again, instead of collecting more demonstrations. A new task means writing a new generator rather than recording new demonstrations.
+To further improve policy performance on the real robot, you can often simprove the simulation, for example by randomizing something you missed, and generate again, instead of collecting real-world tele-op demonstrations. A new task means writing a new generator rather than recording tele-op demonstrations from scratch.
 
-This helps most for whole-body tasks like opening doors and cupboards, which are tedious to teleoperate. Instead, a cuRobo-based whole-body motion planner can be tweaked to solve the task in simulation, and the same recipe then transfers the resulting policy zero-shot to a real mobile manipulator.
+This helps most for whole-body mobile manipulation tasks like opening doors and cupboards, which are tedious to teleoperate. Instead, a cuRobo-based whole-body motion planner can be tweaked to solve the task in simulation, and the same recipe then transfers the resulting policy zero-shot to a real mobile manipulator.
 
 <figure>
   <video src="/images/molmobot-table-height.mp4" autoplay muted loop playsinline preload="metadata"
@@ -129,7 +129,7 @@ For rigid-body manipulation and mobile manipulation, partly. In our pick-and-pla
 
 For deformable and soft objects, and for more complex objects in general, it remains to be seen. Simultion fidelity can also be a bottleneck for tasks that require very precise physics. But the current results are promising!
 
-The open question for me is how far this scales and how many more we can add. There is still a lot left to vary.
+The open question for me is how far this scales and how many more variations we can add. There is still a lot left to vary.
 
 ## Promising Recent Progress
 
@@ -155,7 +155,7 @@ A complementary direction is large-scale reinforcement learning in simulation, d
 
 Taken together, these results point the same way. With enough scale and randomization, simulation is becoming a real source of training data for manipulation. The policy can imitate generated demonstrations, be trained with parallel RL and distilled into vision policies, or combine the two, with imitation pretraining followed by RL fine-tuning.
 
-There is still plenty to improve around this workflow. We need more household environments, and more realistic ones. We need better data generators, and agentic pipelines are already proving quite capable here. And we need simulators and physics engines that come closer to reality.
+There is still plenty to improve around this workflow. We need more simulated household environments, and more realistic ones. We need better data generators, and agentic pipelines are already proving quite capable here. And we need simulators and physics engines that come closer to reality.
 
 It is an exciting time for sim2real in manipulation. Stay tuned for more on this!
 
