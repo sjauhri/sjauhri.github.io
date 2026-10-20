@@ -1,21 +1,21 @@
 ---
 title: "Sim2Real for Robot Manipulation is finally scaling"
-date: 2026-09-10
+date: 2026-10-20
 draft: false
 ShowToc: false
 description: 'Years ago, robot quadrupeds got their "randomize & learn" button which kickstarted sim2real. Now, robot manipulation finally has one too.'
 summary: 'Years ago, robot quadrupeds got their "randomize & learn" button which kickstarted sim2real. Now, robot manipulation finally has one too.'
+# Share-card image for X/LinkedIn: a 1200x630 still, since the cover GIF is over their 5 MB limit.
+socialImage: "/images/molmobot-sim2real-card.jpg"
 cover:
   image: "/images/molmobot-sim2real.gif"
   alt: "Manipulation policies trained in randomized simulation, running on real robots"
   relative: false
 ---
 
-*Paper: [MolmoB0T: Large-Scale Simulation Enables Zero-Shot Manipulation](https://arxiv.org/abs/2603.16861) · [Project page](https://allenai.github.io/MolmoBot/)*
+When I started my PhD in 2021, the state of embodied AI was roughly this: we had cool simulation demos, we had robot policies that could learn impressive behaviors in simulation, and we had very little that worked on an actual robot.
 
-When I started my PhD in 2021, the state of embodied AI was roughly this: we had beautiful simulations, we had robot policies that could learn impressive behaviors in sim, and we had very little that worked on an actual robot.
-
-Transfer from simulation to real hardware was sparse. You could get it to work if you constrained the action space enough, or learned on top of some pre-existing robot skills, and even then success rates were low. Plenty of serious people doubted whether simulation policies would ever transfer at all.
+Transfer from sim to real hardware was sparse. You could get it to work if you constrained the action space enough, or learned on top of some pre-existing robot skills, and even then success rates were low. Plenty of serious people doubted whether simulation policies would even transfer at all and argued that real-world data was the only relevant data.
 
 ## Robot locomotion and the "randomize & learn" button
 
@@ -125,7 +125,7 @@ For deformable and soft objects, and for more complex objects in general, it rem
 
 The open question for me is how far this scales: which kinds of variation matter most, and how many more we can add. There is still a lot left to vary in MolmoSpaces.
 
-## Other recent progress
+## Promising recent progress
 
 MolmoBot is not the only recent result pointing this way. AnyTask <a class="cite" href="#ref-10">[10]</a> from RAI automates task and data generation for sim-to-real policy learning, and SimVLA <a class="cite" href="#ref-11">[11]</a> trains a mobile-manipulation policy entirely in procedurally generated houses and runs it zero-shot in real homes.
 
@@ -141,9 +141,9 @@ Another route is large-scale reinforcement learning in simulation, distilled int
 
 <figure>
   <img src="/images/sim2real-doorman.jpg" loading="lazy"
-       alt="A simulated first-person camera view of a humanoid hand at a door handle, next to a real humanoid robot opening a door.">
+       alt="Three simulated humanoids opening doors with different wall, door and lighting randomization, next to a real humanoid opening a door.">
   <figcaption>
-    <p>DoorMan's simulated RGB view (left) and the real humanoid opening a door (right) <a class="cite" href="#ref-13">[13]</a>.</p>
+    <p>DoorMan in simulation with randomized doors, walls and lighting (left three) and opening a real door zero-shot (right) <a class="cite" href="#ref-13">[13]</a>.</p>
   </figcaption>
 </figure>
 
