@@ -99,15 +99,23 @@ h2 {
 /* Link to the blog under the header: heading-sized and underlined so it
    reads as a destination, not another item in the contact row. */
 a.diary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 22px;
+  text-decoration: none;
+}
+
+a.diary-link span {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
 
-a.diary-link:hover,
-a.diary-link:focus {
-  text-decoration: underline;
+a.diary-link .diary-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
 }
 
 .papertitle {
