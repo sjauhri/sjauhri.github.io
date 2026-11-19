@@ -2690,8 +2690,10 @@ def audit_html(html_str: str) -> list[str]:
     issues.append(
         f"  [html] Unexpanded LaTeX command {m.group(0)} in prose: {snippet!r}"
     )
-  if "$" in text_only:
-    idx = text_only.index("$")
+  # A `$` before a digit is a literal currency sign (`\$0.02`), not leaked math.
+  m_dollar = re.search(r"\$(?!\d)", text_only)
+  if m_dollar:
+    idx = m_dollar.start()
     snippet = text_only[max(0, idx - 30) : min(len(text_only), idx + 30)]
     issues.append(f"  [html] Raw '$' found in prose: {snippet!r}")
   return issues
