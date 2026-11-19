@@ -545,6 +545,8 @@ def normalize_math_tex(tex: str) -> str:
   # KaTeX has no box-scaling commands; keep the content at normal size.
   tex = re.sub(r"\\scalebox\{[^{}]*\}(\[[^\]]*\])?", "", tex)
   tex = re.sub(r"\\resizebox\*?\{[^{}]*\}\{[^{}]*\}", "", tex)
+  # KaTeX's array takes no vertical-position argument (LaTeXML emits `[]`).
+  tex = re.sub(r"\\begin\{array\}\[[^\]]*\]", r"\\begin{array}", tex)
   return tex
 
 
