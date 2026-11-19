@@ -462,6 +462,14 @@ def normalize_math_tex(tex: str) -> str:
   """Cleans LaTeXML line-continuation comments inside expanded TeX math."""
   tex = re.sub(r"%[ \t]*\n[ \t]*", "", tex)
   tex = re.sub(r"\s+", " ", tex).strip()
+  # LaTeXML emits sized delimiters as `\big{(}`, which KaTeX rejects.
+  tex = re.sub(
+      r"\\(big|Big|bigg|Bigg)([lrm]?)\{(\\[a-zA-Z]+|\\.|[^{}\\])\}",
+      r"\\\1\2\3",
+      tex,
+  )
+  # KaTeX has no bbm fonts; fall back to blackboard bold.
+  tex = re.sub(r"\\mathbbm(?![a-zA-Z])", r"\\mathbb", tex)
   return tex
 
 
