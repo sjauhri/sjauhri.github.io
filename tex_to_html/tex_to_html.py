@@ -542,6 +542,9 @@ def normalize_math_tex(tex: str) -> str:
   # KaTeX has no bbm fonts; fall back to blackboard bold.
   tex = re.sub(r"\\mathbbm(?![a-zA-Z])", r"\\mathbb", tex)
   tex = re.sub(r"\\mbox(?![a-zA-Z])", r"\\text", tex)
+  # KaTeX has no box-scaling commands; keep the content at normal size.
+  tex = re.sub(r"\\scalebox\{[^{}]*\}(\[[^\]]*\])?", "", tex)
+  tex = re.sub(r"\\resizebox\*?\{[^{}]*\}\{[^{}]*\}", "", tex)
   return tex
 
 
