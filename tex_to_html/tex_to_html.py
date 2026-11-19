@@ -28,6 +28,7 @@ import struct
 import subprocess
 import sys
 import tempfile
+import unicodedata
 import urllib.request
 import xml.etree.ElementTree as ET
 
@@ -198,6 +199,46 @@ def extract_braced(text: str, start: int) -> tuple[str, int]:
   raise ValueError(f"Unbalanced braces starting at {text[start:start+40]!r}")
 
 
+_TEX_ACCENTS = {
+    "'": "\u0301", "`": "\u0300", '"': "\u0308", "^": "\u0302",
+    "~": "\u0303", "=": "\u0304", ".": "\u0307", "u": "\u0306",
+    "v": "\u030c", "H": "\u030b", "c": "\u0327", "k": "\u0328",
+    "r": "\u030a",
+}
+_TEX_SYMBOLS = {
+    "ss": "ß", "o": "ø", "O": "Ø", "ae": "æ", "AE": "Æ", "oe": "œ",
+    "OE": "Œ", "aa": "å", "AA": "Å", "l": "ł", "L": "Ł", "i": "ı",
+    "j": "ȷ", "textregistered": "®", "textcopyright": "©",
+    "texttrademark": "™",
+}
+
+
+def _convert_tex_accents(s: str) -> str:
+  """Converts generic TeX accent and special-letter macros to UTF-8."""
+  letter = r"(?:\\[ij](?![a-zA-Z])|[a-zA-Z])"
+
+  def _acc(m: re.Match[str]) -> str:
+    base = m.group(2)
+    base = {"\\i": "i", "\\j": "j"}.get(base, base)
+    return unicodedata.normalize("NFC", base + _TEX_ACCENTS[m.group(1)])
+
+  # \'e, \'{e}, {\'e}, \'{\i}, {\'\i}; letter accents need braces/space.
+  s = re.sub(
+      r"\{?\\(['`\"^~=.])\s*\{?\s*(" + letter + r")\s*\}?\}?", _acc, s
+  )
+  s = re.sub(
+      r"\{?\\([uvHckr])(?:\s+|\{\s*)(" + letter + r")\s*\}?\}?", _acc, s
+  )
+  s = re.sub(
+      r"\\(" + "|".join(sorted(_TEX_SYMBOLS, key=len, reverse=True))
+      + r")(?![a-zA-Z])\s?(?:\{\})?",
+      lambda m: _TEX_SYMBOLS[m.group(1)],
+      s,
+  )
+  s = re.sub(r"\\mbox\{([^{}]*)\}", r"\1", s)
+  return s
+
+
 def clean_tex_accents(s: str, strip: bool = True) -> str:
   """Converts common TeX accents, dashes, and non-breaking spaces to UTF-8."""
   s = (
@@ -225,6 +266,7 @@ def clean_tex_accents(s: str, strip: bool = True) -> str:
       .replace("---", "—")
       .replace("--", "–")
   )
+  s = _convert_tex_accents(s)
   for _ in range(3):
     s = re.sub(r"\{([^{}\\]*)\}", r"\1", s)
   collapsed = re.sub(r"\s+", " ", s)
@@ -285,6 +327,11 @@ def _format_bib_text_and_math(
         html.escape(clean_tex_accents(text[text_start:], strip=False))
     )
   joined = "".join(out)
+  joined = re.sub(
+      r"(https?://[^\s<>\"]+?)([.,;]?)(?=\s|$)",
+      r'<a href="\1" target="_blank" rel="noopener">\1</a>\2',
+      joined,
+  )
   return re.sub(
       r"arXiv:(\d{4}\.\d{4,5})",
       r'<a href="https://arxiv.org/abs/\1" target="_blank"'
@@ -347,6 +394,16 @@ def parse_bbl(bbl_path: str) -> tuple[dict[str, dict], list[str]]:
   if not os.path.exists(bbl_path):
     return bib_dict, ordered_keys
   bbl_text = open(bbl_path, encoding="utf-8").read()
+  # Strip spacing/typesetting macros emitted by common .bst styles
+  # (IEEEtran, plainnat) that carry no content.
+  bbl_text = re.sub(r"\\BIBentry(?:ALT|STD)interwordspacing\s*", "", bbl_text)
+  bbl_text = re.sub(r"\\penalty0\s*", " ", bbl_text)
+  bbl_text = re.sub(r"\\hskip\s[^\\]*?\\relax\s*", " ", bbl_text)
+  bbl_text = re.sub(r"\{?\\natexlab\{([^{}]*)\}\}?", r"\1", bbl_text)
+  bbl_text = re.sub(r"\\doi\{([^{}]*)\}", r"doi:\1", bbl_text)
+  bbl_text = re.sub(r"\\emph\{(et~?\s*al\.?)\}", r"et al.", bbl_text)
+  bbl_text = re.sub(r"\\\((.*?)\\\)", r"$\1$", bbl_text, flags=re.S)
+  bbl_text = re.sub(r"\\url\{([^{}]*)\}", r"\1", bbl_text)
   for item in re.split(r"\\bibitem\s*(?=\[|\{)", bbl_text)[1:]:
     if item.startswith("["):
       m = re.match(r"\[([^\]]*)\]\s*\{([^}]+)\}\s*(.*)", item, re.S)
@@ -370,6 +427,20 @@ def parse_bbl(bbl_path: str) -> tuple[dict[str, dict], list[str]]:
       year = ""
 
     blocks = [b.strip() for b in re.split(r"\\newblock\s*", body) if b.strip()]
+    if len(blocks) == 1:
+      # IEEEtran-style entries: authors, ``Title,'' venue, year.
+      m_ieee = re.match(r"^(.*?),?\s*``(.*?),?''\s*,?\s*(.*)$", body, re.S)
+      if m_ieee:
+        blocks = [m_ieee.group(1), m_ieee.group(2) + ".", m_ieee.group(3)]
+      else:
+        m_book = re.match(r"^(.*?),\s*(\\emph\{.*)$", body, re.S)
+        if m_book:
+          title, rest_pos = extract_braced(m_book.group(2), 5)
+          blocks = [
+              m_book.group(1),
+              title.rstrip(".,") + ".",
+              m_book.group(2)[rest_pos:].lstrip(".,; "),
+          ]
     authors_raw = clean_tex_accents(blocks[0]) if blocks else short_author
     title_raw = blocks[1] if len(blocks) > 1 else ""
     venue_raw = " ".join(blocks[2:]) if len(blocks) > 2 else ""
